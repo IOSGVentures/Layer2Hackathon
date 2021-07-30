@@ -36,7 +36,7 @@ https://hertzfinance.github.io/hertz-dapp/#/ (still building)
 0xB232D899b39Ee282EC26BBA385497b9FCD150ED3
 
 ### Documentation
-N/A
+Hertz_Finance.docx
 
 ### Twitter handle
 @HertzFinance
