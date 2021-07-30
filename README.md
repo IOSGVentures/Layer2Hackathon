@@ -2,7 +2,7 @@
 Dream big, let's scale!
 
 # Introduction
-Scaling is a Blue Ocean waiting for the developers to explore and find the New World. Scaling blockchains and specifically Ethereum has been a challenge. Every scaling approach has its own trade-offs regarding the security, decentralization, throughput, and flexibility choices.In support of developers to explore more possibilities of Layer2 solutions and open up new paths, IOSG Ventures and Chainlink are organizing a global Layer2 hackathon, find more into here: https://readymag.com/erqiudao/3003222/
+Scaling is a Blue Ocean waiting for the developers to explore and find the New World. Scaling blockchains and specifically Ethereum has been a challenge. Every scaling approach has its own trade-offs regarding the security, decentralization, throughput, and flexibility choices.In support of developers to explore more possibilities of Layer2 solutions and open up new paths, IOSG Ventures and Chainlink are organizing a global Layer2 hackathon, find more into here: http://hackathon.iosg.vc
 
 # Prizes
 Top winner: $16,000 1 slot
