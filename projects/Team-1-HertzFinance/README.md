@@ -1,10 +1,10 @@
-# Team name
+### Team name
 Team#1 Hertz Finance
 
-# Product direction
+### Product direction
 We are building a multichain One Stop Defi Asset Management platform. Our slogan: Everyone could be warrent buffet / ray dailio and open your own hedge fund in a decentralized fasion.
 
-# Introduction
+### Introduction
 Our platform features:
  - synthetic assets management
  - sushi100, uni100, pancake100 tokens integration
@@ -24,27 +24,27 @@ Our platform tech stack:
  - IDO platform (support multi projects with starting date and ending date, rate etc)
  - Graphql Degen score
 
-# Github link
+### Github link
 It's a complex protocol, so we create a dedicated github account for this.
-Everything is open sourced, enjoy! :-)
+Everything is open sourced, enjoy! :-) <br/>
 https://github.com/HertzFinance
 
-# Demo link
+### Demo link
 https://hertzfinance.github.io/hertz-dapp/#/ (still building)
 
-# Ethereum Wallet Address
+### Ethereum Wallet Address
 0xB232D899b39Ee282EC26BBA385497b9FCD150ED3
 
-# Documentation
+### Documentation
 N/A
 
-# Twitter handle
+### Twitter handle
 @HertzFinance
 
-# Website
+### Website
 https://hertzfinance.github.io/hertz-dapp/#/
 
-# eam information
+### Team information
 Let us know your team composition and everyone's responsibility
  - [ Seabook ] Product Designer, Solution architecht and Smart Contract Developer.
  - [ Victor] Product Manager, Designer and Owner. Will be responsible for the pitch.
