@@ -1,43 +1,33 @@
-*团队名称：
-Fly Tip
+*Team name
+Team #8 FLYTIP
 
-*产品方向
-请简要说明您的产品方向，以便评委了解您主要建造的空间，等等。
-基于Aurora的网页打赏插件，支持去中心化支付的打赏插件，
-Telegrame的“微信红包”，转的是Layer2上的币，可以单发也可以群发。
+*Product direction
+A tipping plugin that supports decentralized payments,based on Aurora, just like Telegrame's "wechat red envelopes".The transfer is Layer2 coin, can be sent individually or mass.
 
-*详细介绍你的产品，包括你将解决哪些问题，你正在使用哪些突出的技术，它将带来什么价值，等等。
-1.FLYTIP是一个基于Aurora的去中心化网页打赏组件，实现点对点打赏。
-2.使用web3.js开发的react组件包。博客的开发者可以使用npm install flytip 安装flytip，使用TipJar把点赞组件添加在页面中，通过一个属性来绑定钱包地址。博客的阅读者点击该组件就可以直接触发钱包插件，对作者的钱包地址直接打赏。
-3.产品价值在于为开发者和用户带来去中心化的打赏方案，弥补现有中心化打赏方案的不足。
+*Introduction
+1. FLYTIP is a decentralised web tipping component based on Aurora that enables peer-to-peer tipping.
+2. The value of the product is to bring decentralized tipping solutions to developers and users, and to make up for the shortcomings of existing centralized tipping solutions
+3. This react component package developed using Web3.js.Blog developers can install Flytip using NPM Install Flytip, use Flytip to add a like component to the page, and use a property to bind the wallet address.
 
-实现了微信抢红包，可以提币，活跃Telegrame上的社群，方便项目方进行空投，小白用户也可以快捷方便参加，不需要区块链知识。用了Layer2的技术，gas费低
 
-*Github链接
-附加项目的存储库链接
+*Github link
 https://github.com/CodeAunt/tipJar
 
-*演示链接
-如果有的话，提供一个演示录音的链接
+*Demo link
 https://codeaunt.github.io/tipping/
 
-*Ethereum钱包地址
+*Ethereum Wallet Address
 0xA56f231d08CCc6D8CEAc5C1764dD5086A02E495d
 
-*.团队信息
-让我们知道你的团队组成和每个人的责任
+### Documentation
+[optional] add here if there is a doc for the product （PDF, etc.)
 
-Lw, 开发人员
-Ld，开发人员
-Zxl,开发人员
-Gjc，产品经理
-Chz,策划
-Sxl,策划
-Gxg,策划
 
-按照上述模板的要求填写信息
-让每个团队创造的问题保持开放
-在提交截止日期前，向本回购提出一份PR，详细步骤如下:
-叉这回购
-添加你的项目文件(源代码，演示视频，文档，PPT等)到例如/projects/Team-0-AAAA， /projects/Team-1-BBBB文件夹
-这个回购的新公关
+Team information
+[ Wan Liu ] , project manager
+[ Eric Lee ] , developer
+[ ZiLi Zhou ] , developer
+[ JianCheng Gu ] , UI designer
+[ HangZi Chen ] , product manager
+[ XiaoLing Song ] , product manager
+[ JiTing Gao ] , UX designer
