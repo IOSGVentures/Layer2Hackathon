@@ -30,7 +30,11 @@ Everything is open sourced, enjoy! :-) <br/>
 https://github.com/HertzFinance
 
 ### Demo link
-https://hertzfinance.github.io/hertz-dapp/#/ (still building)
+Video Demo
+https://youtu.be/_J84S9vpkG0
+
+Live Demo
+https://hertzfinance.github.io/hertz-dapp/#/
 
 ### Ethereum Wallet Address
 0xB232D899b39Ee282EC26BBA385497b9FCD150ED3
