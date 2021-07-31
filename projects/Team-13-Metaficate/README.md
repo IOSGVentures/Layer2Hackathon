@@ -1,5 +1,5 @@
 ## Website
-https://metafication.com/
+https://www.metaficate.com/
 
 ## PPT
 https://github.com/Metaficate/Docs
