@@ -1,0 +1,36 @@
+{
+    "name": "synth rank 4",
+    "initiators": [
+        {
+            "type": "runlog",
+            "params": {
+                "address": "0x3d4e6c7d1de34bff3e15f586d2a88f5bb844cf32"
+            }
+        }
+    ],
+    "tasks": [
+        {
+			"type": "bridge-synth",
+            "params": {
+                "base": "Synth",
+                "quote": "4"
+            }
+        },
+        {
+            "type": "copy",
+            "params": {
+                "copyPath": [
+                    "result"
+                ]
+            }      
+        },
+        {
+            "type": "EthBytes32",
+            "params": {}
+        },
+        {
+            "type": "ethtx",
+            "params": {}
+        }
+    ]
+}
