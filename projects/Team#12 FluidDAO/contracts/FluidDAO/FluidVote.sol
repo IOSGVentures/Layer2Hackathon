@@ -37,8 +37,9 @@ abstract contract FluidVote is FluidActivity {
         address warrantAddress_,
         address host,
         address cfa,
-        address acceptedToken
-    ) FluidActivity(_initiator, warrantAddress_) {
+        address acceptedToken,
+        address twitterVerifyAddress
+    ) FluidActivity(_initiator, warrantAddress_, twitterVerifyAddress) {
         require(address(voteToken_) != address(0), "0 address is not allowed");
         require(address(warrantAddress_) != address(0), "0 address is not allowed");
         require(address(host) != address(0), "0 address is not allowed");

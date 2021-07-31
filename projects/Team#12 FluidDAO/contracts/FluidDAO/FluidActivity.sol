@@ -30,8 +30,9 @@ abstract contract FluidActivity is GroupRegister{
 
     constructor (
         address _initiator, 
-        address __warrant
-        ) GroupRegister(__warrant) {
+        address __warrant,
+        address twitterVerifyAddress
+        ) GroupRegister(__warrant, twitterVerifyAddress) {
         initiator = _initiator;
     }
 

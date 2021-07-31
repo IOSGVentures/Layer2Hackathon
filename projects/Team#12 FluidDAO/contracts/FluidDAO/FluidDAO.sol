@@ -11,7 +11,8 @@ contract FluidDAO is FluidVote {
         address warrantAddress,
         address host,
         address cfa,
-        address acceptedToken
+        address acceptedToken,
+        address twitterVerifyAddress
     ) 
     FluidVote(
         _initiator, 
@@ -19,7 +20,8 @@ contract FluidDAO is FluidVote {
         voteToken_,
         host, 
         cfa, 
-        acceptedToken)
+        acceptedToken,
+        twitterVerifyAddress)
     {}
 
 
