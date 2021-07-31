@@ -2,7 +2,7 @@
 Team #8 FLYTIP
 
 ### Product direction
-A tipping plugin that supports decentralized payments,based on Aurora
+A tipping plugin that supports decentralized payments
 
 ### Introduction
 1. FLYTIP is a decentralised web tipping component that enables peer-to-peer tipping.
