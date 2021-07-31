@@ -84,8 +84,6 @@ contract Warrant is ERC721URIStorage, Ownable, RedirectAll {
         return baseURI_;
     }
 
-    /** ========== modifier ========== */
-
     /** ========== event ========== */
     event IPFSPathset(address indexed creator, string _path);
 }

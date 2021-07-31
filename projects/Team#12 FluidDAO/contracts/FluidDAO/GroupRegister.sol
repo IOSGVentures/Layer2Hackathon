@@ -2,8 +2,9 @@
 pragma solidity ^0.8.0;
 
 import "../Interface/IWarrant.sol";
+import "../Interface/IIosgTwitter.sol";
 
-contract GroupRegister {
+abstract contract GroupRegister {
 
     struct GroupMessage {
         string memory description;
@@ -14,10 +15,14 @@ contract GroupRegister {
     // byte32 groupname
     mapping (bytes32 => GroupMessage) internal groups;
 
+    mapping (bytes32 => uint256) internal tokenIdOfPerGroup;
+
     IWarrant internal warrant;
 
-    constructor(address warrantAddress) {
+    IIosgTwitter internal twitterVerify;
+    constructor(address warrantAddress, address twitterVerifyAddress) {
         warrant = IWarrant(warrantAddress);
+        twitterVerify = IIosgTwitter(twitterVerifyAddress);
     }
 
     /** ========== external mutative functions ========== */
@@ -27,7 +32,7 @@ contract GroupRegister {
         string memory description,
         address fundReceiver
     ) external {
-
+        _requireTwitterVerified(msg.sender);
         require(!requireGroupMessageFillout(groupname), "Sorry, the group has been registered");
         _groupMessageSetting(groupname, description, msg.sender, fundReceiver);
     }
@@ -44,7 +49,7 @@ contract GroupRegister {
 
 
     /** ========== external view functions ========== */
-    function getGroupMessage(bytes32 _groupname) external view returns (
+    function getGroupMessage(bytes32 _groupname) public view returns (
         string memory _description,
         address _fundReceiver,
         address _groupregister
@@ -52,6 +57,10 @@ contract GroupRegister {
         _description = groups[_groupname].description;
         _fundReceiver = groups[_groupname].fundReceiver;
         _groupregister = groups[_groupname].groupregister;
+    }
+
+    function getGroupFundReceiver(byte32 _groupname) public view returns (address fundReceiver) {
+        fundReceiver = groups[_groupname].fundReceiver;
     }
 
     /** ========== internal mutative functions ========== */
@@ -76,6 +85,8 @@ contract GroupRegister {
         address register = groups[_groupname].groupregister;
         tokenId = warrant.newWarrant(register, _tokenIdPath);
 
+        tokenIdOfPerGroup[_groupname] = tokenId;
+
         emit groupRegistered(register, tokenId);
     }
 
@@ -84,7 +95,16 @@ contract GroupRegister {
         blanked = !groups[groupname].description? false: true;
     }
 
+    function _getTokenIdOfPerGroup(bytes32 groupname) internal view returns (uint256 tokenId) {
+        return tokenIdOfPerGroup[_groupname];
+    }
+
+    function _requireTwitterVerified(address account) internal view returns (bool) {
+         require(twitterVerify.getVerification(account) == true, "Sorry, you must verify your account first");
+    }
+
     /** ========== event ========== */
     event groupMessageUpdated(bytes32 indexed groupname, string description, address register, address fundReceiver);
+
     event groupRegistered(address indexed register, uint256 tokenId);
 }

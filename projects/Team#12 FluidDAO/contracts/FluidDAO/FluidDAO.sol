@@ -1,21 +1,26 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "./FluidActivity.sol";
 import "./FluidVote.sol";
-import "./GroupRegister.sol";
 
-
-contract FluidDAO {
+contract FluidDAO is FluidVote {
     
+    constructor(
+        address _initiator, 
+        address voteToken_,
+        address warrantAddress,
+        address host,
+        address cfa,
+        address acceptedToken
+    ) 
+    FluidVote(
+        _initiator, 
+        warrantAddress, 
+        voteToken_,
+        host, 
+        cfa, 
+        acceptedToken)
+    {}
 
 
-    /** ========== external mutative functions ========== */
-    function addGroup()
-
-
-
-    /** ========== internal view functions ========== */
-
-    /** ========== public view functions ========== */
 }

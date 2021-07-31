@@ -9,25 +9,30 @@ abstract contract FluidActivity is GroupRegister{
         uint256 startTime;
         uint256 endTime;
         uint256 roundGroupAmount;
-        address warrantAddress;   // each group will get one of the warrants
+        // address warrantAddress;   // each group will get one of the warrants
     }
 
+    // activity details of per round.
     mapping (uint256 => Activity) internal votingRound;
 
-    mapping (uint256 => mapping(bytes32 => uint256)) internal groupInVoting;
+    // voteId => group. And the voteId is the tokenId of per gruop per round.
+    mapping (uint256 => mapping(uint256 => bytes32)) internal groupInVoting;
 
+    // total group amount per round.
     mapping (uint256 => uint256) internal totalGroupAmount;
+
+    // total tokenIds per round.
+    mapping (uint256 => uint256[]) internal tokenIdsPerRound;
 
     uint256 internal currentRound;
 
     address internal initiator;
 
-    address internal _warrant;
-
-    constructor (address _initiator, address __warrant) {
-
+    constructor (
+        address _initiator, 
+        address __warrant
+        ) GroupRegister(__warrant) {
         initiator = _initiator;
-        _warrant = __warrant;
     }
 
     /** ========== public view functions ========== */
@@ -35,37 +40,39 @@ abstract contract FluidActivity is GroupRegister{
         return currentRound;
     }
 
-    function getVoteId(
+    function getGroupname(
         uint256 _currentRound, 
-        bytes32 _groupname
-        ) public view returns (uint256 voteId) {
-        return groupInVoting[_currentRound][_groupname];
+        uint256 voteId
+        ) public view returns (bytes32 _groupname) {
+        return groupInVoting[_currentRound][voteId];
+    }
+
+    function getTokenIdPerRound() public view returns (uint256[]) {
+        return tokenIdsPerRound[currentRound];
     }
 
     function getActivityDetail(uint256 round) public view returns (
         uint256 _startTime,
         uint256 _endTime,
-        uint256 _totalGroupAmount,
-        address _warrantAddress
+        uint256 _totalGroupAmount
     ) {
         Activity memory activity = votingRound[round];
         _startTime = activity.startTime;
         _endTime = activity.endTime;
         _totalGroupAmount = activity.totalGroupAmount;
-        _warrantAddress = activity.warrantAddress;
     }
 
     function getCurrentActivity() public view returns (
         uint256 _startTime,
         uint256 _endTime,
-        uint256 _totalGroupAmount,
-        address _warrantAddress
+        uint256 _totalGroupAmount
     ) {
         return getActivityDetail(getCurrentRound());
     }
 
     function getRemainingVotingTime() public view returns (uint256 remainingTime) {
-        remainingTime = getCurrentActivity().endTime - getCurrentActivity().startTime;
+        (uint256 startTime, uint265 endTime, ,) = getCurrentActivity();
+        remainingTime = endTime - block.timestamp - startTime;
     }
 
     /** ========== external mutative functions ========== */
@@ -100,20 +107,20 @@ abstract contract FluidActivity is GroupRegister{
         votingRound[currentRound].startTime = _startTime;
         votingRound[currentRound].endTime = _endTime;
         votingRound[currentRound].roundGroupAmount = 0;
-        votingRound[currentRound].warrantAddress = _warrant;
 
-        emit addedActivity(_startTime, _endTime, _warrant);
+        emit addedActivity(_startTime, _endTime);
     }
 
     function _registerForActivity(bytes32 groupname, string memory _tokenIdPath) internal {
         require(block.timestamp > votingRound[currentRound].startTime && block.timestamp < votingRound[currentRound].endTime, "sorry, there is no a valid activitiy");
-        require(groupInVoting[currentRound][groupname] == 0, "the group has been registered");
+        require(_getTokenIdOfPerGroup(groupname) == 0, "the group has been registered");
 
         (, address register,) = getGroupMessage(groupname);
         require(register == msg.sender, "Sorry, you are not the register of group");
 
         uint256 tokenId = _singleGroupRegister(register, _tokenIdPath);
-        groupInVoting[currentRound][groupname] = tokenId;
+        groupInVoting[currentRound][tokenId] = groupname;
+        tokenIdsPerRound[currentRound].push(tokenId);
         _updateGroupAmount();
 
         emit newRoundGroupAdded(currentRound, register, tokenId);        
@@ -143,6 +150,8 @@ abstract contract FluidActivity is GroupRegister{
 
     /** ========== event ========== */
     event addedActivity(uint256 indexed currentRound, uint256 startTime, uint256 endTime, address warrant);
+
     event updatedGroupAmount(uint256 indexed currentRound, uint256 totalGroupAmount);
+
     event newRoundGroupAdded(uint256 indexed currentRound, address indexed group, uint256 tokenId);
 }

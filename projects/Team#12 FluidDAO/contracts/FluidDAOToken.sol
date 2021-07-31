@@ -15,9 +15,7 @@ contract FluidDAOToken is ERC20, Ownable {
         _mint(_owner, initialSupply);
     }
 
-    /** ========== public mutative functions ========== */
-
-    /** ========== public view functions ========== */
+    // FluidDAO Token will be wrapped to be superToken of superfluid.
 
 
     /** ========== external mutative functions ========== */
@@ -25,10 +23,4 @@ contract FluidDAOToken is ERC20, Ownable {
         _mint(receiver, newsupply);
     }
 
-    /** ========== external view functions ========== */
-
-
-    /** ========== modifier ========== */
-
-    /** ========== event ========== */
 }
