@@ -1,4 +1,3 @@
-
 pragma solidity =0.6.6;
 
 
@@ -228,50 +227,24 @@ interface IWETH {
 
 contract AcyV1Router02 is IAcyV1Router02 {
     using SafeMath for uint;
-
+    
     address public immutable override factory;
     address public immutable override WETH;
     
+    constructor() public {
+        factory = 0x6A7e3487A5ed6f437984683f33A71a05ad1D9D1C;
+        WETH = 0x6A7e3487A5ed6f437984683f33A71a05ad1D9D1C;
+    }
+    
     address[3] public middleTokenList = [
-        0x632fa2CbF6ff637999736fE5d05210c3e0617BfD, // Token A
-        0xe4F3d94D0bF7dAe710dABea760cD9510382D0E95, // Token B
-        0x0EA3eFDa74e00745eC8402Ce3206a902313cAcc0  // Token C
+        0xf11060364b9e16dD1D962BABb4a88693C7de1cA6, // Token X
+        0x2716660971b0eCbdA9F70BAaeF142b04383E6941, // Token Y
+        0xeC5a5D6A58b76CBf67683A96575205745Ecd0F4c  // Token Z
     ];
-    
-    // Just for three tokens' pair
-    function calculOutputAmount(uint112 inputAmount, address inputToken, address middleToken, address outputToken) external view returns ( uint outputTokenAmount){
-        outputTokenAmount = this.getOutputAmountAPI(
-            this.getOutputAmountAPI(
-                    inputAmount,
-                    inputToken,
-                    middleToken),
-            middleToken,
-            outputToken);
-    }
-    
-    function getOutputAmountAPI(uint112 inputAmount, address inputTokenAddress,address outputTokenAddress) external view returns (uint112 amountOut){
-        address pairAddress = AcyV1Library.pairFor(factory,inputTokenAddress,outputTokenAddress);
-        require(pairAddress != address(0),"pairAddress error");
-        (uint112 reserve0, uint112 reserve1, ) = IAcyV1Pair(pairAddress).getReserves();
-        require(inputTokenAddress == IAcyV1Pair(pairAddress).token0() || inputTokenAddress == IAcyV1Pair(pairAddress).token1(),"token error");
-        
-        if(inputTokenAddress == IAcyV1Pair(pairAddress).token1()){
-            uint112 tmp = reserve1;
-            reserve1 = reserve0;
-            reserve0 = tmp;
-        } 
-        require(inputAmount < reserve0 ,"inputAmount error");
-        return uint112(AcyV1Library.getAmountOut(uint(inputAmount), uint(reserve0), uint(reserve1)));
-    }
 
     modifier ensure(uint deadline) {
         require(deadline >= block.timestamp, 'AcyV1Router: EXPIRED');
         _;
-    }
-
-    constructor() public {
-        factory = 0x6A7e3487A5ed6f437984683f33A71a05ad1D9D1C;
-        WETH = 0x6A7e3487A5ed6f437984683f33A71a05ad1D9D1C;
     }
 
     receive() external payable {
@@ -471,61 +444,134 @@ contract AcyV1Router02 is IAcyV1Router02 {
         }
     }
     
+    struct Reserves {
+        uint256 Xy;
+        uint256 Yx;
+        uint256 Xz;
+        uint256 Zx;
+        uint256 Yz;
+        uint256 Zy;
+    }
+    
     // amountT: total input token amount
     // XToken:input token address
     // YToken:output token address
     // ZToken : middle token address
-    function getDirAmount(uint256 amountT,address XToken,address YToken,address ZToken) view public returns (uint256 dirAmount) {
-        (uint Xy, uint Yx) = AcyV1Library.getReserves(factory, XToken, YToken);
-        (uint Xz, uint Zx) = AcyV1Library.getReserves(factory, XToken, ZToken);
-        (uint Yz, uint Zy) = AcyV1Library.getReserves(factory, YToken, ZToken);
-        // (Yz, Zy) = (Yz.div(10**18), Zy.div(10**18));
-        // amountT = amountT.div(10**18);
-        dirAmount = (Zx.mul(Yz) + Yx.mul(Zy) + Yx.mul(Zx)) / (Yx.mul(Zy).mul(Xz) + Yx.mul(Zy).mul(amountT) + (Yx.mul(amountT) - Xy.mul(Yz)).mul(Zx));
+    function getDirAmount(uint256 amountT,address XToken,address YToken,address ZToken) view public returns (uint dirAmount) {
+        Reserves memory reserves;
+        (reserves.Xy, reserves.Yx) = AcyV1Library.getReserves(factory, XToken, YToken);
+        (reserves.Xz, reserves.Zx) = AcyV1Library.getReserves(factory, XToken, ZToken);
+        (reserves.Yz, reserves.Zy) = AcyV1Library.getReserves(factory, YToken, ZToken);
+        dirAmount = 0;
         
+        uint256 fenmu = (reserves.Zx).mul(reserves.Yz) + (reserves.Yx).mul(reserves.Zy) + (reserves.Yx).mul(reserves.Zx);
+        
+        dirAmount = (reserves.Yx).mul(amountT).mul((reserves.Zy).add(reserves.Zx)) / fenmu;
         return dirAmount;
     }
+
     
-    function getReserves(address XToken,address YToken) view public returns (uint256 Xy, uint256 Yx) {
-        (uint Xy, uint Yx) = AcyV1Library.getReserves(factory, XToken, YToken);
-        return (Xy, Yx);
+    function getBlockTime() public view returns(uint){
+        return now;
     }
     
+    // three-tokens swap function
     function swapExactTokensForTokens(
         uint amountIn,
         uint amountOutMin,
         address[] calldata path,
         address to,
         uint deadline
-    ) external virtual override returns (uint[] memory amounts) {
+    ) external override virtual ensure(deadline) returns (uint[] memory amounts) {
         for (uint i = 0; i < 3; i++) {
             if (middleTokenList[i] != path[0] && middleTokenList[i] != path[1]) {
                 uint dirAmount = getDirAmount(amountIn, path[0], middleTokenList[i], path[1]);
                 
                 this.swapExactTokensForTokensPath(
-                    dirAmount,
-                    0,
-                    path,
-                    to,
-                    now.add(1800));
-
-                // calculate the arbitrage amount
+                            dirAmount,
+                            0,
+                            path,
+                            to,
+                            now.add(1800),
+                            msg.sender);
+                
+                
                 address[] memory arbPath = new address[](3);
                 arbPath[0] = path[0];
                 arbPath[1] = middleTokenList[i];
                 arbPath[2] = path[1];
+                
                 this.swapExactTokensForTokensPath(
-                    amountIn - dirAmount,
-                    0,
-                    arbPath,
-                    to,
-                    now.add(1800));
-                break;
+                            amountIn - dirAmount,
+                            0,
+                            arbPath,
+                            to,
+                            now.add(1800),
+                            msg.sender);
             }
         }
     }
     
+    // Just for three tokens' pair
+    function calculOutputAmount(uint inputAmount, address inputToken, address middleToken, address outputToken) public view returns ( uint outputTokenAmount){
+        outputTokenAmount = this.getOutputAmountAPI(
+            this.getOutputAmountAPI(
+                    inputAmount,
+                    inputToken,
+                    middleToken),
+            middleToken,
+            outputToken);
+    }
+    
+    function getOutputAmountAPI(uint inputAmount, address inputTokenAddress,address outputTokenAddress) public view returns (uint amountOut){
+        address pairAddress = AcyV1Library.pairFor(factory,inputTokenAddress,outputTokenAddress);
+        require(pairAddress != address(0),"pairAddress error");
+        (uint reserve0, uint reserve1, ) = IAcyV1Pair(pairAddress).getReserves();
+        require(inputTokenAddress == IAcyV1Pair(pairAddress).token0() || inputTokenAddress == IAcyV1Pair(pairAddress).token1(),"token error");
+        
+        if(inputTokenAddress == IAcyV1Pair(pairAddress).token1()){
+            uint tmp = reserve1;
+            reserve1 = reserve0;
+            reserve0 = tmp;
+        } 
+        require(inputAmount < reserve0 ,"inputAmount error");
+        return uint(AcyV1Library.getAmountOut(uint(inputAmount), uint(reserve0), uint(reserve1)));
+    }
+
+    
+    function getArbitrageAmountOut(uint amountIn, address inputToken, address outputToken) public view returns (uint amountOut) {
+        require(amountIn > 0, 'getArbitrageAmountOut: INSUFFICIENT_INPUT_AMOUNT');
+        require(inputToken != outputToken, 'getArbitrageAmountOut: TOKEN_MUST_BE_DIFFERENT');
+
+        for (uint i = 0; i < 3; i++) {
+            if (middleTokenList[i] != inputToken && middleTokenList[i] != outputToken) {
+                uint dirAmount = getDirAmount(amountIn, inputToken, middleTokenList[i], outputToken);
+
+                uint outputFromTwoTokensAmount = this.getOutputAmountAPI(dirAmount,inputToken,outputToken);
+                uint outputFromThreeToeknsAmount = this.calculOutputAmount(amountIn - dirAmount, inputToken, middleTokenList[i], outputToken);
+                return outputFromTwoTokensAmount + outputFromThreeToeknsAmount;
+            }
+        }
+        return 0;
+    }
+    
     function swapExactTokensForTokensPath(
+        uint amountIn,
+        uint amountOutMin,
+        address[] memory path,
+        address to,
+        uint deadline,
+        address myAddress
+    ) public virtual ensure(deadline) returns (uint[] memory amounts) {
+        amounts = AcyV1Library.getAmountsOut(factory, amountIn, path);
+        require(amounts[amounts.length - 1] >= amountOutMin, 'AcyV1Router: INSUFFICIENT_OUTPUT_AMOUNT');
+        TransferHelper.safeTransferFrom(
+            path[0], myAddress, AcyV1Library.pairFor(factory, path[0], path[1]), amounts[0]
+        );
+        _swap(amounts, path, to);
+    }
+    
+    function originalSwapExactTokensForTokens(
         uint amountIn,
         uint amountOutMin,
         address[] calldata path,
@@ -539,6 +585,7 @@ contract AcyV1Router02 is IAcyV1Router02 {
         );
         _swap(amounts, path, to);
     }
+    
     function swapTokensForExactTokens(
         uint amountOut,
         uint amountInMax,
@@ -553,6 +600,7 @@ contract AcyV1Router02 is IAcyV1Router02 {
         );
         _swap(amounts, path, to);
     }
+    
     function swapExactETHForTokens(uint amountOutMin, address[] calldata path, address to, uint deadline)
         external
         virtual
@@ -568,6 +616,7 @@ contract AcyV1Router02 is IAcyV1Router02 {
         assert(IWETH(WETH).transfer(AcyV1Library.pairFor(factory, path[0], path[1]), amounts[0]));
         _swap(amounts, path, to);
     }
+    
     function swapTokensForExactETH(uint amountOut, uint amountInMax, address[] calldata path, address to, uint deadline)
         external
         virtual
@@ -690,6 +739,7 @@ contract AcyV1Router02 is IAcyV1Router02 {
         external
         virtual
         override
+        ensure(deadline)
     {
         require(path[path.length - 1] == WETH, 'AcyV1Router: INVALID_PATH');
         TransferHelper.safeTransferFrom(
@@ -767,6 +817,22 @@ library SafeMath {
         return a / b;
     }
 }
+
+
+// library AcyArbitrageV1Library {
+//     using SafeMath for uint;
+
+
+//     // given an input amount of an asset and pair reserves, returns the maximum output amount of the other asset
+//     function getAmountOut(uint amountIn, uint reserveIn, uint reserveOut) internal pure returns (uint amountOut) {
+//         require(amountIn > 0, 'AcyV1Library: INSUFFICIENT_INPUT_AMOUNT');
+//         require(reserveIn > 0 && reserveOut > 0, 'AcyV1Library: INSUFFICIENT_LIQUIDITY');
+//         uint amountInWithFee = amountIn.mul(997);
+//         uint numerator = amountInWithFee.mul(reserveOut);
+//         uint denominator = reserveIn.mul(1000).add(amountInWithFee);
+//         amountOut = numerator / denominator;
+//     }
+// }
 
 library AcyV1Library {
     using SafeMath for uint;
