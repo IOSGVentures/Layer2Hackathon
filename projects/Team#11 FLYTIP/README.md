@@ -2,10 +2,10 @@
 Team #8 FLYTIP
 
 ### Product direction
-A tipping plugin that supports decentralized payments
+A tipping plugin that supports decentralized payments，based on Aurora, both Polygon and Arbitrum are supported
 
 ### Introduction
-1. FLYTIP is a decentralised web tipping component that enables peer-to-peer tipping.
+1. FLYTIP is a decentralised web tipping component based on Aurora that enables peer-to-peer tipping.
 2. The value of the product is to bring decentralized tipping solutions to developers and users, and to make up for the shortcomings of existing centralized tipping solutions
 3. This react component package developed using Web3.js.Blog developers can install Flytip using NPM Install Flytip, use Flytip to add a like component to the page, and use a property to bind the wallet address.
 
