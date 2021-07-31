@@ -34,9 +34,6 @@ With MCDEX, Quant strategy can be easily executed in MCDEX derivatives platform 
 
 
 
-![image](https://user-images.githubusercontent.com/7462849/127729418-032c49f9-2881-49fb-aa34-782ea65853f7.png)
-
-
 ### Product UE flow
 
 ![image](https://user-images.githubusercontent.com/7462849/127729418-032c49f9-2881-49fb-aa34-782ea65853f7.png)
