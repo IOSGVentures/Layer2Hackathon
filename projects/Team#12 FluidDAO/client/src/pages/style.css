@@ -1,0 +1,33 @@
+.connectButton{
+    margin-top: 16px;
+    width: 120px;
+    margin-bottom: 16px;
+    position: fixed ! important;
+    z-index: 10;
+}
+
+.first{
+
+
+    background-size:100% 100%;
+    background-attachment:fixed;
+    background-image:linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url('../picture/city.jpg');
+}
+
+.second{
+
+
+    background-size:100% 100%;
+    background-attachment:fixed;
+    background-image:linear-gradient( rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7) ),url('../picture/city.jpg');
+}
+
+
+
+.third{
+
+
+    background-size:100% 100%;
+    background-attachment:fixed;
+    background-image:linear-gradient( rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7) ),url('../picture/city.jpg');
+}
