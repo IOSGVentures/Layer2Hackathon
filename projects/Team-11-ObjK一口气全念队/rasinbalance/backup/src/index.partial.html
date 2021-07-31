@@ -1,0 +1,46 @@
+<header><img src="https://docs.synthetix.io/img/logos/synthetix_blue_logo.png" width="100%" /></header>
+
+<main>
+  
+  <p><input name="network" placeholder="Enter network (none for mainnet)" /> <input name="block" placeholder="Enter block number (none for latest)" />
+    <button name="start">Start</button></p>
+  <section>
+    <div>
+      <p id="network"><strong>Network:</strong> <var>...</var></p>
+      <p class="helper-text">The breakdown of all synths currently issued</p>
+      <table cellpadding=0 cellspacing=0>
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>Synth</th>
+            <th>Rate</th>
+            <th>Total Supply</th>
+            <th>USD Value</th>
+            <th>Percentage</th>
+            <th>Non-Zero</th>
+            <th></th>
+            <th>Inverse Lower</th>
+            <th>Inverse Entry</th>
+            <th>Inverse Upper</th>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+
+      <dl>
+          <dt>Total USD value of Synths</dt>
+          <dd id="synthsTotal"></dd>
+          <dt>SNXUSD price</dt>
+          <dd id="snxusdPrice"></dd>
+      </dl>
+    </div>
+   </div>
+    
+  </section>
+  <div><div><h1>Compare Synths</h1><div id="graphCompare"><p class="helper-text">The breakdown of all synths (excluding sUSD)</p></div></div>
+      <!--div><h1>Total Issued Over Time</h1><div id="graphTotalIssued"><p class="helper-text">The total issued synths over time (roughly one day per point)....</p></div></div-->
+      
+  
+</main>
