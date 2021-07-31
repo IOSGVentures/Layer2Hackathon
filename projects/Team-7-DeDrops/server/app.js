@@ -35,6 +35,7 @@ app.use(async (ctx, next) => {
 })
 
 router.use('/address', require('./app/controller/address.js'))
+router.use('/info', require('./app/controller/info.js'))
 router.use('/signTest', require('./routes/signTest.js'))
 router.use('/upload', require('./routes/upload.js'))
 router.use('/', async ctx => {

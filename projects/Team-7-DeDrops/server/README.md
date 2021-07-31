@@ -62,7 +62,7 @@ module.exports = exports;
 <br>
 <br>
 
-### 接口 address/check(address, nftId)
+### 接口 address/checkNft(address, nftId)
 
 #### Method
 GET
@@ -79,3 +79,35 @@ GET
 <br>
 <br>
 
+### 接口 address/checkToken(address, nftId, token)
+
+#### Method
+GET
+
+#### 参数 
+    address       用户地址
+    nftId nftid
+### 返回   
+    data.match 是否达到标准
+    data.nft nft信息
+    data.money 资产是否达标
+    data.actions 交互是否达标
+    data.sign 签名信息
+<br>
+<br>
+
+### 接口 info/dropList(token)
+
+#### Method
+GET
+
+#### 参数 
+    token drop token address
+### 返回 data //list  
+    data.token token地址
+    data.owner drop 地址
+    data.amount 金额
+    data.match 是否达到drop条件
+    data.spender drop地址
+<br>
+<br>

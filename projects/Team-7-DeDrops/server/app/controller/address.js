@@ -3,7 +3,8 @@ const date = require("silly-datetime");
 const utils = require('../../routes/tools/utils.js');
 const config = require('../../conf/config.js');
 const service = require('../service/service')
-const sign = require('../../routes/tools/sign')
+const sign = require('../../routes/tools/sign');
+const db = require('../../routes/model/db.js');
 
 // 查询地址资产
 router.get('/assets', async (ctx) => {
@@ -22,7 +23,7 @@ router.get('/assets', async (ctx) => {
 	}
 })
 
-router.get('/check', async (ctx) => {
+router.get('/checkNft', async (ctx) => {
 	try {
 		let address = ctx.query.address
 		let id = ctx.query.id
@@ -30,11 +31,44 @@ router.get('/check', async (ctx) => {
 
 		if (resp.match) {
 			let body = {
-				token: '0x55d398326f99059ff775485246999027b3197956',
-				owner: '0xE44081Ee2D0D4cbaCd10b44e769A14Def065eD4D',
-				spender: '0x37f88413AADb13d85030EEdC7600e31573BCa3c3',
+				id: id,
+				spender: config.eth_account,
+				deadline: new Date().getTime() + 100000
+			}	
+			resp.sign = sign.signERC1155Claim(body)
+		}
+		ctx.body = {
+			code: 0,
+			msg: 'ok',
+			data: resp
+		}
+	} catch (err) {
+		ctx.body = { data: null, code: 1, msg: err.message }
+	}
+})
+
+router.get('/checkToken', async (ctx) => {
+	try {
+		let address = ctx.query.address
+		let id = ctx.query.id
+		let token = ctx.query.token
+		let resp = await ctx.service.nft.check(address, id)
+
+		let item = {
+            token: token,
+            owner: address,
+            spender: config.eth_account,
+			match: resp.match
+        }
+		await db.saveERC20ClaimData(item)
+
+		if (resp.match) {
+			let body = {
+				token: token,
+				owner: address,
+				spender: config.eth_account,
 				value: '1000000000000000000',
-				deadline: '1627457471'
+				deadline: new Date().getTime() + 100000
 			}
 	
 			resp.sign = sign.signERC20Claim(body)

@@ -82,7 +82,7 @@ async function saveERC20ClaimData(obj) {
     let conn = null
     try {
         conn = await MongoClient.connect(config.db_url(), { useUnifiedTopology: true })
-        let erc20claims = conn.db(config.db_name).collection('erc20claims')
+        let erc20claims = conn.db(config.db_name).collection(Collections.erc20claims)
 
         obj.time = Date.now()
         await erc20claims.deleteOne({ 'token': obj.token, 'owner': obj.owner, 'spender': obj.spender })
@@ -103,7 +103,7 @@ async function getERC20ClaimData(obj) {
     let conn = null
     try {
         conn = await MongoClient.connect(config.db_url(), { useUnifiedTopology: true })
-        let erc20claims = conn.db(config.db_name).collection('erc20claims')
+        let erc20claims = conn.db(config.db_name).collection(Collections.erc20claims)
 
         let arr = await erc20claims.find(obj).toArray()
         return arr

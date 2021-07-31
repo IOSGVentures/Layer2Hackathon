@@ -1,5 +1,6 @@
 
 const dropnft = require('./dropnft')
+const droperc = require('./droperc')
 
 var _ctx
 
@@ -17,6 +18,9 @@ function load (ctx) {
     }
     if (!_ctx.schedule.dropnft) {
         _ctx.schedule.dropnft = new dropnft(ctx)
+    }
+    if (!_ctx.schedule.droperc) {
+        _ctx.schedule.droperc = new droperc(ctx)
     }
     console.log('load schedule!')
     return _ctx
