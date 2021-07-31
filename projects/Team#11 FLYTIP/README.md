@@ -13,7 +13,7 @@ Telegrame的“微信红包”，转的是Layer2上的币，可以单发也可�
 
 实现了微信抢红包，可以提币，活跃Telegrame上的社群，方便项目方进行空投，小白用户也可以快捷方便参加，不需要区块链知识。用了Layer2的技术，gas费低
 
-* Github链接
+*Github链接
 附加项目的存储库链接
 https://github.com/CodeAunt/tipJar
 
@@ -21,7 +21,7 @@ https://github.com/CodeAunt/tipJar
 如果有的话，提供一个演示录音的链接
 https://codeaunt.github.io/tipping/
 
-* Ethereum钱包地址
+*Ethereum钱包地址
 0xA56f231d08CCc6D8CEAc5C1764dD5086A02E495d
 
 *.团队信息
