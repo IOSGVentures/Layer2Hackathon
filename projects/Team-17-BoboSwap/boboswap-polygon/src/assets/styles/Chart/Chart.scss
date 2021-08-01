@@ -1,0 +1,181 @@
+@import "../base.scss";
+.Chart{
+  width: 100%;
+  min-height: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  @include bg-color(bg);
+  padding-bottom: 65px;
+  position: relative;
+  
+  .title{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px 0;
+    position: fixed;
+    z-index: 5000;
+    @include bg-color(bg);
+    img{
+      margin-right: 10px;
+    }
+    .left_icon{
+      margin-left:20px;
+      font-size: 25px;
+      @include text-color(text);
+    }
+    .line{
+      width: 1px;
+      height: 16px;
+      @include bg-color(line);
+      margin: 0 13px 0 26px;
+    }
+    .text{
+      font-size: 20px;
+      font-family: PingFangSC-Semibold, PingFang SC;
+      @include text-color(text);
+    }
+  }
+  .data{
+    width: calc(100% - 40px);
+    padding: 0 20px;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
+    margin-top: 60px;
+    .data_left{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      .red_data{
+        font-size: 22px;
+        font-family: PingFangSC-Semibold, PingFang SC;
+        font-weight: 600;
+        @include text-color(red_data);
+        margin-bottom: 5px;
+      }
+      .data_item2 :first-child{
+        font-size: 13px;
+        @include text-color(data_item2);
+      }
+      .data_item2 :last-child{
+        font-size: 13px;
+        @include text-color(red_data);
+        margin-left: 13px;
+      }
+    }
+    .data_right{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      .right_item{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom:10px ;
+      }
+      .right_item :first-child{
+        font-size: 12px;
+        @include text-color(right_item1);
+        margin-right: 20px;
+      }
+      .right_item :last-child{
+        font-size: 12px;
+        @include text-color(right_item2);
+      }
+    }
+
+  }
+  .list{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    .list_nav{
+      width: calc(100% - 76px);
+      padding: 0 38px 0 38px;
+      @include border-bottom(1px,list_nav_active);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      .nav_text{
+        font-size: 14px;
+        color: #6D87A8;
+        padding: 15px 0 13px;
+      }
+      .list_nav_active{
+        color: #4380ff;
+        border-bottom: 2px solid #4380ff;
+      }
+    }
+    .list_box{
+      width: 100%;
+      height: auto;
+      overflow-y: scroll;
+    }
+  }
+  .footer{
+    width: calc(100% - 40px);
+    padding: 0 20px;
+    height: 65px;
+    @include bg-color(footer);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    @include border-top-top(1px,list_nav_active);
+    .buy{
+      width: 135px;
+      height: 42px;
+      background: #18A15E;
+      border-radius: 5px;
+      line-height: 42px;
+      color: #fff;
+      font-size: 13px;
+      text-align: center;
+      font-weight: bold;
+    }
+    .sell{
+      width: 135px;
+      height: 42px;
+      background: #DD4E41;
+      border-radius: 5px;
+      line-height: 42px;
+      color: #fff;
+      font-size: 13px;
+      text-align: center;
+      font-weight: bold;
+    }
+    .collection{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      span{
+        font-size: 12px;
+        @include text-color(text);
+      }
+      i{
+        font-size: 22px;
+        @include text-color(text);
+      }
+    }
+    
+  }
+}

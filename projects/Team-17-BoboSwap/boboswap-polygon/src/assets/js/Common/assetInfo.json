@@ -1,0 +1,437 @@
+{
+    "137": {
+        "assets": [
+            {
+                "name": "Wrapped Matic",
+                "symbol": "WMATIC",
+                "decimals": 18,
+                "address": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+                "coingeckoId": "wmatic"
+              },
+            {
+              "name": "Wrapped Ether",
+              "symbol": "WETH",
+              "decimals": 18,
+              "address": "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619",
+              "coingeckoId": "weth"
+            },
+            {
+              "name": "Wrapped BTC",
+              "symbol": "WBTC",
+              "decimals": 8,
+              "address": "0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6",
+              "coingeckoId": "wrapped-bitcoin"
+            },
+            {
+              "name": "Tether USD",
+              "symbol": "USDT",
+              "decimals": 6,
+              "address": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
+              "coingeckoId": "tether"
+            },
+            {
+              "name": "USD Coin",
+              "symbol": "USDC",
+              "decimals": 6,
+              "address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+              "coingeckoId": "usd-coin"
+            },
+            {
+              "name": "Dai Stablecoin",
+              "symbol": "DAI",
+              "decimals": 18,
+              "address": "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+              "coingeckoId": "dai"
+            },
+            {
+                "name": "ChainLink Token",
+                "symbol": "LINK",
+                "decimals": 18,
+                "address": "0x53E0bca35eC356BD5ddDFebbD1Fc0fD03FaBad39",
+                "coingeckoId": "chainlink"
+            },
+            {
+                "name": "1INCH Token",
+                "symbol": "1INCH",
+                "decimals": 18,
+                "address": "0x9c2C5fd7b07E95EE044DDeba0E97a665F142394f",
+                "coingeckoId": "1inch"
+            },
+            {
+                "name": "Uniswap",
+                "symbol": "UNI",
+                "decimals": 18,
+                "address": "0xb33EaAd8d922B1083446DC23f610c2567fB5180f",
+                "coingeckoId": "binance-peg-uniswap"
+            },
+            {
+                "name": "Aave Token",
+                "symbol": "AAVE",
+                "decimals": 18,
+                "address": "0xD6DF932A45C0f255f85145f286eA0b292B21C90B",
+                "coingeckoId": "aave"
+            }
+          ],
+          "pairs": [
+            {
+              "baseTokenName": "USDT",
+              "coingecko_currency": "usd",
+              "baseTokenAddr": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
+              "peerTokens": [
+                  "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+                  "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619",
+                  "0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6", 
+                  "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174", 
+                  "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063", 
+                  "0x53E0bca35eC356BD5ddDFebbD1Fc0fD03FaBad39", 
+                  "0x9c2C5fd7b07E95EE044DDeba0E97a665F142394f", 
+                  "0xb33EaAd8d922B1083446DC23f610c2567fB5180f",
+                  "0xD6DF932A45C0f255f85145f286eA0b292B21C90B"
+              ]
+            },
+            {
+              "baseTokenName": "USDC",
+              "coingecko_currency": "usd",
+              "baseTokenAddr": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+              "peerTokens": [
+                "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+                "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619",
+                "0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6", 
+                "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063", 
+                "0x53E0bca35eC356BD5ddDFebbD1Fc0fD03FaBad39", 
+                "0x9c2C5fd7b07E95EE044DDeba0E97a665F142394f", 
+                "0xb33EaAd8d922B1083446DC23f610c2567fB5180f",
+                "0xD6DF932A45C0f255f85145f286eA0b292B21C90B" 
+              ]
+            }
+        ]
+    },
+    "128": {
+      "boboswapContract": "0x...",
+      "assets": [        
+        {
+          "name": "Wrapped HT",
+          "symbol": "WHT",
+          "decimals": 18,
+          "address": "0x5545153CCFcA01fbd7Dd11C0b23ba694D9509A6F",
+          "coingeckoId": "huobi-token"
+        },
+        {
+          "name": "Heco-Peg HUSD Token",
+          "symbol": "HUSD",
+          "decimals": 8,
+          "address": "0x0298c2b32eaE4da002a15f36fdf7615BEa3DA047",
+          "coingeckoId": "husd"
+        },
+        {
+          "name": "Heco-Peg USDTHECO Token",
+          "symbol": "USDT",
+          "decimals": 18,
+          "address": "0xa71EdC38d189767582C38A3145b5873052c3e47a",
+          "coingeckoId": "tether"
+        },
+        {
+          "name": "Heco-Peg HBTC Token",
+          "symbol": "HBTC",
+          "decimals": 18,
+          "address": "0x66a79D23E58475D2738179Ca52cd0b41d73f0BEa",
+          "coingeckoId": "huobi-btc"
+        },
+        {
+          "name": "Heco-Peg ETH Token",
+          "symbol": "ETH",
+          "decimals": 18,
+          "address": "0x64FF637fB478863B7468bc97D30a5bF3A428a1fD",
+          "coingeckoId": "ethereum"
+        },
+        {
+            "name": "MDX Token",
+            "symbol": "MDX",
+            "decimals": 18,
+            "address": "0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c",
+            "coingeckoId": "mdex"
+        }
+      ],
+      "pairs": [
+          {
+            "baseTokenName": "HUSD",
+            "coingecko_currency": "usd",
+            "baseTokenAddr": "0x0298c2b32eaE4da002a15f36fdf7615BEa3DA047",
+            "peerTokens": [
+                "0x5545153CCFcA01fbd7Dd11C0b23ba694D9509A6F",
+                "0xa71EdC38d189767582C38A3145b5873052c3e47a",
+                "0x66a79D23E58475D2738179Ca52cd0b41d73f0BEa",
+                "0x64FF637fB478863B7468bc97D30a5bF3A428a1fD",
+                "0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c"
+            ]
+          },
+          {
+            "baseTokenName": "USDT",
+            "coingecko_currency": "usd",
+            "baseTokenAddr": "0xa71EdC38d189767582C38A3145b5873052c3e47a",
+            "peerTokens": [
+                "0x5545153CCFcA01fbd7Dd11C0b23ba694D9509A6F",
+                "0x66a79D23E58475D2738179Ca52cd0b41d73f0BEa",
+                "0x64FF637fB478863B7468bc97D30a5bF3A428a1fD",
+                "0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c"
+            ]
+          },
+          {
+            "baseTokenName": "ETH",
+            "coingecko_currency": "eth",
+            "baseTokenAddr": "0x64FF637fB478863B7468bc97D30a5bF3A428a1fD",
+            "peerTokens": [
+                "0x66a79D23E58475D2738179Ca52cd0b41d73f0BEa",
+                "0x25D2e80cB6B86881Fd7e07dd263Fb79f4AbE033c"
+            ]
+          }
+      ]
+    },
+    "56": {
+      "boboswapContract": "0x...",
+      "assets": [
+        {
+          "name": "Wrapped BNB",
+          "symbol": "WBNB",
+          "decimals": 18,
+          "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+          "coingeckoId": "wbnb"
+        },
+        {
+          "name": "Binance-Peg BUSD Token",
+          "symbol": "BUSD",
+          "decimals": 18,
+          "address": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+          "coingeckoId": "binance-usd"
+        },
+        {
+          "name": "Binance-Peg BUSD-T",
+          "symbol": "USDT",
+          "decimals": 18,
+          "address": "0x55d398326f99059fF775485246999027B3197955",
+          "coingeckoId": "tether"
+        },
+        {
+          "name": "Binance-Peg BTCB Token",
+          "symbol": "BTCB",
+          "decimals": 18,
+          "address": "0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c",
+          "coingeckoId": "binance-bitcoin"
+        },
+        {
+          "name": "Binance-Peg Ethereum Token",
+          "symbol": "ETH",
+          "decimals": 18,
+          "address": "0x2170Ed0880ac9A755fd29B2688956BD959F933F8",
+          "coingeckoId": "binance-eth"
+        },
+        {
+            "name": "MDX Token",
+            "symbol": "MDX",
+            "decimals": 18,
+            "address": "0x9C65AB58d8d978DB963e63f2bfB7121627e3a739",
+            "coingeckoId": "mdex"
+        },
+        {
+            "name": "Binance-Peg Dogecoin",
+            "symbol": "DOGE",
+            "decimals": 18,
+            "address": "0xbA2aE424d960c26247Dd6c32edC70B295c744C43",
+            "coingeckoId": "dogecoin"
+        },
+        {
+            "name": "Binance-Peg Filecoin",
+            "symbol": "FIL",
+            "decimals": 18,
+            "address": "0x0D8Ce2A99Bb6e3B7Db580eD848240e4a0F9aE153",
+            "coingeckoId": "filecoin"
+        },
+        {
+            "name": "Binance-Peg Polkadot Token",
+            "symbol": "DOT",
+            "decimals": 18,
+            "address": "0x7083609fCE4d1d8Dc0C979AAb8c869Ea2C873402",
+            "coingeckoId": "binance-peg-polkadot"
+        },
+        {
+            "name": "PancakeSwap Token",
+            "symbol": "Cake",
+            "decimals": 18,
+            "address": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+            "coingeckoId": "pancakeswap-token"
+        },
+        {
+            "name": "AUTOv2",
+            "symbol": "AUTO",
+            "decimals": 18,
+            "address": "0xa184088a740c695E156F91f5cC086a06bb78b827",
+            "coingeckoId": "auto"
+        }
+      ],
+      "pairs": [
+        {
+          "baseTokenName": "BUSD",
+          "coingecko_currency": "usd",
+          "baseTokenAddr": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+          "peerTokens": [
+              "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c", 
+              "0x55d398326f99059fF775485246999027B3197955",  
+              "0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c",  
+              "0x2170Ed0880ac9A755fd29B2688956BD959F933F8", 
+              "0x9C65AB58d8d978DB963e63f2bfB7121627e3a739", 
+              "0xbA2aE424d960c26247Dd6c32edC70B295c744C43", 
+              "0x0D8Ce2A99Bb6e3B7Db580eD848240e4a0F9aE153",  
+              "0x7083609fCE4d1d8Dc0C979AAb8c869Ea2C873402", 
+              "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82", 
+              "0xa184088a740c695E156F91f5cC086a06bb78b827"  
+          ]
+        },
+        {
+          "baseTokenName": "USDT",
+          "coingecko_currency": "usd",
+          "baseTokenAddr": "0x55d398326f99059fF775485246999027B3197955",
+          "peerTokens": [
+            "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c", 
+            "0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c", 
+            "0x2170Ed0880ac9A755fd29B2688956BD959F933F8", 
+            "0x9C65AB58d8d978DB963e63f2bfB7121627e3a739", 
+            "0xbA2aE424d960c26247Dd6c32edC70B295c744C43", 
+            "0x0D8Ce2A99Bb6e3B7Db580eD848240e4a0F9aE153",
+            "0x7083609fCE4d1d8Dc0C979AAb8c869Ea2C873402",
+            "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+            "0xa184088a740c695E156F91f5cC086a06bb78b827"
+          ]
+        },
+        {
+          "baseTokenName": "ETH",
+          "coingecko_currency": "eth",
+          "baseTokenAddr": "0x2170Ed0880ac9A755fd29B2688956BD959F933F8",
+          "peerTokens": [
+            "0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c"
+          ]
+        }
+    ]
+    },
+    "1": {
+        "boboswapContract": "0x...",
+        "assets": [
+          {
+            "name": "Wrapped Ether",
+            "symbol": "WETH",
+            "decimals": 18,
+            "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+            "coingeckoId": "weth"
+          },
+          {
+            "name": "Wrapped BTC",
+            "symbol": "WBTC",
+            "decimals": 8,
+            "address": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+            "coingeckoId": "wrapped-bitcoin"
+          },
+          {
+            "name": "Tether USD",
+            "symbol": "USDT",
+            "decimals": 6,
+            "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+            "coingeckoId": "tether"
+          },
+          {
+            "name": "USD Coin",
+            "symbol": "USDC",
+            "decimals": 6,
+            "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+            "coingeckoId": "usd-coin"
+          },
+          {
+            "name": "Dai Stablecoin",
+            "symbol": "DAI",
+            "decimals": 18,
+            "address": "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+            "coingeckoId": "dai"
+          },
+          {
+              "name": "ChainLink Token",
+              "symbol": "LINK",
+              "decimals": 18,
+              "address": "0x514910771AF9Ca656af840dff83E8264EcF986CA",
+              "coingeckoId": "chainlink"
+          },
+          {
+              "name": "1INCH Token",
+              "symbol": "1INCH",
+              "decimals": 18,
+              "address": "0x111111111117dC0aa78b770fA6A738034120C302",
+              "coingeckoId": "1inch"
+          },
+          {
+              "name": "Shiba v2 Limited",
+              "symbol": "SHIBA2",
+              "decimals": 18,
+              "address": "0xA0335820dC549dBfae5b8D691331CadfCA7026E0",
+              "coingeckoId": "shiba-inu"
+          },
+          {
+              "name": "Uniswap",
+              "symbol": "UNI",
+              "decimals": 18,
+              "address": "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
+              "coingeckoId": "binance-peg-uniswap"
+          },
+          {
+              "name": "Aave Token",
+              "symbol": "AAVE",
+              "decimals": 18,
+              "address": "0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9",
+              "coingeckoId": "aave"
+          }
+        ],
+        "pairs": [
+          {
+            "baseTokenName": "WETH",
+            "coingecko_currency": "eth",
+            "baseTokenAddr": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+            "peerTokens": [
+                "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+                "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+                "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+                "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+                "0x514910771AF9Ca656af840dff83E8264EcF986CA",
+                "0x111111111117dC0aa78b770fA6A738034120C302",
+                "0xA0335820dC549dBfae5b8D691331CadfCA7026E0",
+                "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
+                "0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9"
+            ]
+          },
+          {
+            "baseTokenName": "USDT",
+            "coingecko_currency": "usd",
+            "baseTokenAddr": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+            "peerTokens": [
+                "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+                "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+                "0x6B175474E89094C44Da98b954EedeAC495271d0F", 
+                "0x514910771AF9Ca656af840dff83E8264EcF986CA", 
+                "0x111111111117dC0aa78b770fA6A738034120C302", 
+                "0xA0335820dC549dBfae5b8D691331CadfCA7026E0", 
+                "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984", 
+                "0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9" 
+            ]
+          },
+          {
+            "baseTokenName": "USDC",
+            "coingecko_currency": "usd",
+            "baseTokenAddr": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+            "peerTokens": [
+                "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+                "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+                "0x514910771AF9Ca656af840dff83E8264EcF986CA",
+                "0x111111111117dC0aa78b770fA6A738034120C302", 
+                "0xA0335820dC549dBfae5b8D691331CadfCA7026E0", 
+                "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984", 
+                "0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9"  
+            ]
+          }
+      ]
+      }
+}

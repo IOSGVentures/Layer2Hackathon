@@ -1,0 +1,76 @@
+@import '../base.scss';
+.CurrentEntrust{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  .lsit_item{
+    width: 100%;
+    height: auto;
+    padding: 10px 0;
+    @include border-bottom(1px,list_nav_active);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    .type{
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      margin-bottom: 11px;
+      .type_text{
+        color: #1B55D1;
+      }
+      .type_asset{
+        color: #71819A;
+      }
+      .chexiao{
+        width: 58px;
+        height: 18px;
+        background: #1B55D1;
+        border-radius: 2px;
+        line-height: 18px;
+        text-align: center;
+        color: #fff;
+      }
+      .jiaoyi_status{
+        width: 58px;
+        height: 18px;
+        background:rgba($color: #1B55D1, $alpha: 0.1);
+        border-radius: 2px;
+        text-align: center;
+        color: #1B55D1;
+      }
+    }
+    .data_info{
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      .small_box{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        .info_title{
+          color: #71819A;
+          margin-bottom: 5px;
+        }
+        .info_num{
+         @include text-color(info_num);
+        }
+      }
+      .info_time{
+        align-items: flex-end;
+      }
+    }  
+  }
+}

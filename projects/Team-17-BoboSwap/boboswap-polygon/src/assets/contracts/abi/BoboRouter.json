@@ -1,0 +1,680 @@
+{
+	"contractName": "BoboRouter",
+	"networks": {},
+	"abi": [
+		{
+			"inputs": [],
+			"stateMutability": "nonpayable",
+			"type": "constructor"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "previousOwner",
+					"type": "address"
+				},
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "newOwner",
+					"type": "address"
+				}
+			],
+			"name": "OwnershipTransferred",
+			"type": "event"
+		},
+		{
+			"inputs": [],
+			"name": "DECIMALS_GAP",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "FACTOR",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "MinLiquidityValue",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "USDC",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "USDT",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "WMATIC",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "burnAddress",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "inToken",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "outToken",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "amountIn",
+					"type": "uint256"
+				}
+			],
+			"name": "caculateAmountOut",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "uint256",
+							"name": "totalAmountOut",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "totalULiquidity",
+							"type": "uint256"
+						},
+						{
+							"internalType": "enum SwapPool[]",
+							"name": "types",
+							"type": "uint8[]"
+						},
+						{
+							"internalType": "address[]",
+							"name": "middleTokens",
+							"type": "address[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "partialAmountIns",
+							"type": "uint256[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "partialAmountOuts",
+							"type": "uint256[]"
+						}
+					],
+					"internalType": "struct ResultInfo",
+					"name": "resultInfo",
+					"type": "tuple"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "dexFactory",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "inToken",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "outToken",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "amountIn",
+					"type": "uint256"
+				}
+			],
+			"name": "caculateOneDexAmountOut",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "uint256",
+							"name": "totalAmountOut",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "totalULiquidity",
+							"type": "uint256"
+						},
+						{
+							"internalType": "enum SwapPool[]",
+							"name": "types",
+							"type": "uint8[]"
+						},
+						{
+							"internalType": "address[]",
+							"name": "middleTokens",
+							"type": "address[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "partialAmountIns",
+							"type": "uint256[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "partialAmountOuts",
+							"type": "uint256[]"
+						}
+					],
+					"internalType": "struct ResultInfo",
+					"name": "resultInfo",
+					"type": "tuple"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "routerAddr",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "partialAmountIn",
+					"type": "uint256"
+				},
+				{
+					"internalType": "address[]",
+					"name": "path",
+					"type": "address[]"
+				}
+			],
+			"name": "getAmountOut",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "inToken",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "outToken",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "amountIn",
+					"type": "uint256"
+				}
+			],
+			"name": "getBestSwapPath",
+			"outputs": [
+				{
+					"internalType": "uint256[]",
+					"name": "amountsOut",
+					"type": "uint256[]"
+				},
+				{
+					"components": [
+						{
+							"internalType": "uint256",
+							"name": "totalAmountOut",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "totalULiquidity",
+							"type": "uint256"
+						},
+						{
+							"internalType": "enum SwapPool[]",
+							"name": "types",
+							"type": "uint8[]"
+						},
+						{
+							"internalType": "address[]",
+							"name": "middleTokens",
+							"type": "address[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "partialAmountIns",
+							"type": "uint256[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "partialAmountOuts",
+							"type": "uint256[]"
+						}
+					],
+					"internalType": "struct ResultInfo",
+					"name": "bestResultInfo",
+					"type": "tuple"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "factoryAddr",
+					"type": "address"
+				},
+				{
+					"internalType": "address[]",
+					"name": "path",
+					"type": "address[]"
+				}
+			],
+			"name": "getMinUValue",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "factoryAddr",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "inToken",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "outToken",
+					"type": "address"
+				}
+			],
+			"name": "getPaths",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "address[]",
+							"name": "tokens",
+							"type": "address[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "minUValues",
+							"type": "uint256[]"
+						},
+						{
+							"internalType": "uint256",
+							"name": "pathCount",
+							"type": "uint256"
+						}
+					],
+					"internalType": "struct BoboRouter.PathsInfo",
+					"name": "pathsInfo",
+					"type": "tuple"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "factoryAddr",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "token0",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "token1",
+					"type": "address"
+				}
+			],
+			"name": "getReserves",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "getWMaticPriceOnChainlink",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "getWMaticPriceOnQuickSwap",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "token",
+					"type": "address"
+				}
+			],
+			"name": "isUToken",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"stateMutability": "pure",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"name": "middleTokens",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "owner",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "quickSwapFactory",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "quickSwapRouter",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "quickSwapUsdtMaticPair",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "renounceOwnership",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "sushiSwapFactory",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "sushiSwapRouter",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"components": [
+						{
+							"internalType": "uint256",
+							"name": "totalAmountOut",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "totalULiquidity",
+							"type": "uint256"
+						},
+						{
+							"internalType": "enum SwapPool[]",
+							"name": "types",
+							"type": "uint8[]"
+						},
+						{
+							"internalType": "address[]",
+							"name": "middleTokens",
+							"type": "address[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "partialAmountIns",
+							"type": "uint256[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "partialAmountOuts",
+							"type": "uint256[]"
+						}
+					],
+					"internalType": "struct ResultInfo",
+					"name": "_bestSwapInfo",
+					"type": "tuple"
+				},
+				{
+					"internalType": "address",
+					"name": "_inToken",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "_outToken",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_amountIn",
+					"type": "uint256"
+				},
+				{
+					"internalType": "address",
+					"name": "_receiver",
+					"type": "address"
+				}
+			],
+			"name": "swap",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "amountOut",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "newOwner",
+					"type": "address"
+				}
+			],
+			"name": "transferOwnership",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		}
+	]
+}

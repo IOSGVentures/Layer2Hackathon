@@ -1,0 +1,93 @@
+@import '../base.scss';
+
+.pool{
+  width: calc(100% - 40px);
+  padding: 0 20px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  
+  .pool_item{
+    width: 100%;
+    height: auto;
+    @include bg-color(select_down);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px;
+    @include border(border-bottom-color);
+    .poll_title{
+      width: calc(100% - 22px);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 11px;
+      @include border-bottom(1px,list_nav_active);
+      .incons{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        .bobo{
+          margin-left: -15px;
+        }
+      }
+      .asset{
+        font-size: 16px;
+        font-weight: 500;
+        @include text-color(text1_first_child);
+      }
+    }
+    .pool_center{
+      width: calc(100% - 22px);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 11px;
+      .left{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+      }
+      .left :first-child{
+        font-size: 18px;
+        color: #2866EF;
+      }
+      .left :last-child{
+        font-size: 12px;
+        color: #77808E;
+      }
+      .right{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+      }
+      .right :first-child{
+        font-size: 18px;
+        @include text-color(text1_first_child);
+      }
+      .right :last-child{
+        font-size: 12px;
+        color: #77808E;
+      }
+    }
+    .mining_btn{
+      width: 100%;
+      height: 42px;
+      background: #1B55D1;
+      border-radius: 5px;
+      line-height: 42px;
+      text-align: center;
+      color: #fff;
+      font-size: 12px;
+    }
+  }
+}

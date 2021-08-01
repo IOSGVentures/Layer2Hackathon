@@ -1,0 +1,219 @@
+{
+  "id": "2480633",
+  "name": "swap",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "6626188",
+      "name": "star",
+      "font_class": "star4",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "773017",
+      "name": "star",
+      "font_class": "star2",
+      "unicode": "e681",
+      "unicode_decimal": 59009
+    },
+    {
+      "icon_id": "792443",
+      "name": "copy2-复制",
+      "font_class": "copy2fuzhi",
+      "unicode": "e701",
+      "unicode_decimal": 59137
+    },
+    {
+      "icon_id": "7521437",
+      "name": "more",
+      "font_class": "more1",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "15167561",
+      "name": "left",
+      "font_class": "left_2",
+      "unicode": "e64e",
+      "unicode_decimal": 58958
+    },
+    {
+      "icon_id": "18592570",
+      "name": "right",
+      "font_class": "right",
+      "unicode": "e6a1",
+      "unicode_decimal": 59041
+    },
+    {
+      "icon_id": "1160827",
+      "name": "more",
+      "font_class": "more",
+      "unicode": "e84b",
+      "unicode_decimal": 59467
+    },
+    {
+      "icon_id": "19128090",
+      "name": "箭头",
+      "font_class": "jiantou",
+      "unicode": "e640",
+      "unicode_decimal": 58944
+    },
+    {
+      "icon_id": "5394521",
+      "name": "package",
+      "font_class": "package",
+      "unicode": "e644",
+      "unicode_decimal": 58948
+    },
+    {
+      "icon_id": "560643",
+      "name": "down",
+      "font_class": "down",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "560644",
+      "name": "up",
+      "font_class": "up",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "845855",
+      "name": "star",
+      "font_class": "star",
+      "unicode": "e683",
+      "unicode_decimal": 59011
+    },
+    {
+      "icon_id": "973192",
+      "name": "weixin",
+      "font_class": "weixin",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
+    },
+    {
+      "icon_id": "1223257",
+      "name": "list_more",
+      "font_class": "listmore",
+      "unicode": "e651",
+      "unicode_decimal": 58961
+    },
+    {
+      "icon_id": "1280562",
+      "name": "Unselected",
+      "font_class": "51weixuanze",
+      "unicode": "e63e",
+      "unicode_decimal": 58942
+    },
+    {
+      "icon_id": "1368574",
+      "name": "close",
+      "font_class": "close",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "1467369",
+      "name": "list",
+      "font_class": "list",
+      "unicode": "e697",
+      "unicode_decimal": 59031
+    },
+    {
+      "icon_id": "1526605",
+      "name": "reload",
+      "font_class": "reload",
+      "unicode": "e895",
+      "unicode_decimal": 59541
+    },
+    {
+      "icon_id": "5634657",
+      "name": "facebook",
+      "font_class": "facebook",
+      "unicode": "f19d",
+      "unicode_decimal": 61853
+    },
+    {
+      "icon_id": "6298830",
+      "name": "all_selects",
+      "font_class": "all_selects",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "7207754",
+      "name": "sysseting",
+      "font_class": "sysseting",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "11488274",
+      "name": "help",
+      "font_class": "help",
+      "unicode": "e782",
+      "unicode_decimal": 59266
+    },
+    {
+      "icon_id": "11673575",
+      "name": "up",
+      "font_class": "up1",
+      "unicode": "e671",
+      "unicode_decimal": 58993
+    },
+    {
+      "icon_id": "15167551",
+      "name": "down",
+      "font_class": "down_3",
+      "unicode": "e64d",
+      "unicode_decimal": 58957
+    },
+    {
+      "icon_id": "18542391",
+      "name": "chose",
+      "font_class": "chose",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "19446213",
+      "name": "推特",
+      "font_class": "twitter",
+      "unicode": "ea90",
+      "unicode_decimal": 60048
+    },
+    {
+      "icon_id": "19805037",
+      "name": "message",
+      "font_class": "message",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
+      "icon_id": "19959074",
+      "name": "nodata",
+      "font_class": "nodata",
+      "unicode": "e729",
+      "unicode_decimal": 59177
+    },
+    {
+      "icon_id": "995158",
+      "name": "K-line",
+      "font_class": "kxian",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "1624964",
+      "name": "icon_kline",
+      "font_class": "icon_kline",
+      "unicode": "e696",
+      "unicode_decimal": 59030
+    }
+  ]
+}

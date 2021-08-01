@@ -1,0 +1,43 @@
+@import '../base.scss';
+.transaction{
+  width: 100%;
+  height: auto;
+  min-height:calc(100% - 60px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+ 
+  padding-top: 60px;
+  @include bg-color(bg);
+  .transaction_nav{
+   
+    width: calc(100% - 40px);
+    padding: 0 20px;
+    height: auto;
+    @include border-bottom(1px,transaction_nav);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    span{
+      padding: 10px 8px;
+      font-family: PingFangSC-Semibold, PingFang SC;
+      font-size: 16px;
+      font-weight: bold;
+      @include text-color(transaction_nav_span);
+      margin-right: 22px;
+    }
+   
+  }
+}
+.active{
+  @include text-color(transaction_nav_active);
+ @include border-bottom(3px,transaction_nav_active);
+  
+ }
+ [data-theme="light"] .active{
+  border-bottom: 3px solid #1B55D1;
+  color: #0350DA!important;
+  
+ }

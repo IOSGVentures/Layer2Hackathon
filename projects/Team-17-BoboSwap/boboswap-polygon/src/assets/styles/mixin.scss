@@ -1,0 +1,75 @@
+@mixin bg-color($key) {
+  background: map-get($colors-dark, $key);
+  
+  [data-theme="light"] & {
+    background: map-get($colors-light, $key);
+  }
+}
+
+@mixin text-color($key) {
+  color: map-get($colors-dark, $key);
+  [data-theme="light"] & {
+    color: map-get($colors-light, $key);
+  }
+}
+
+@mixin border( $color) {
+  border:1px solid  map-get($colors-dark, $color);
+  [data-theme="light"] & {
+    border:1px solid  map-get($colors-light, $color);
+  }
+}
+
+@mixin border-bottom($size,$color) {
+  border-bottom:$size solid  map-get($colors-dark, $color);
+  [data-theme="light"] & {
+    border-bottom:1px solid  map-get($colors-light, $color);
+  }
+}
+@mixin border-top-top($size,$color) {
+  border-top:$size solid  map-get($colors-dark, $color);
+  [data-theme="light"] & {
+    border-top:1px solid  map-get($colors-light, $color);
+  }
+}
+@mixin border-bottom-color($color) {
+  border-bottom-color:map-get($colors-dark, $color);
+  [data-theme="light"] & {
+    border-bottom-color:map-get($colors-light, $color);
+  }
+}
+@mixin border-right-color($color) {
+  border-right-color:map-get($colors-dark, $color);
+  [data-theme="light"] & {
+    border-right-color:map-get($colors-light, $color);
+  }
+}
+@mixin border-left-color($color) {
+  border-left-color:map-get($colors-dark, $color);
+  [data-theme="light"] & {
+    border-left-color:map-get($colors-light, $color);
+  }
+}
+@mixin border-top($color) {
+  border-top:1px solid map-get($colors-dark, $color);
+  [data-theme="light"] & {
+    border-left-color:map-get($colors-light, $color);
+  }
+}
+@mixin diyborder($width,$color) {
+  border-right:$width solid  map-get($colors-dark, $color);
+  [data-theme="light"] & {
+    border-right:$width solid  map-get($colors-light, $color);
+  }
+}
+
+@mixin shadow($shadows...) {
+  box-shadow: $shadows;
+}
+
+@mixin box-shadow($size, $key) {
+  box-shadow: $size map-get($colors-dark, $key);
+  [data-theme="light"] & {
+    box-shadow: $size map-get($colors-light, $key);
+  }
+}

@@ -1,0 +1,463 @@
+@import "../base.scss";
+.trade {
+ width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  letter-spacing: 0.5px;
+  .trade_view{
+    width:calc( 100% - 40px);
+    padding: 0 20px;
+    height: auto;
+    margin: 14px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .view_left{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 216px;
+      .assets{
+        margin: 0 10px;
+        margin-left: 0px;
+        font-size: 16px;
+        font-weight: bold;
+        @include text-color(assets);
+      }
+      .rate{
+        padding: 3px 10px;
+        background: rgba($color:#D46B3A, $alpha: 0.1);
+        color: #D46B3A;
+        border-radius: 4px;
+      }
+    }
+    .view_right{
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      .more{
+        font-size: 22px;
+        @include text-color(assets);
+        margin-left: 20px;
+      }
+    }
+  }
+  .trade_view2{
+    width:calc( 100% - 40px);
+    padding: 0 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    .view2_left{
+      width: 216px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      .btns{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        span{
+          width: 103px;
+          height: 42px;
+          @include bg-color(btns_span);
+          border-radius: 5px;
+          text-align: center;
+          line-height: 42px;
+          font-size: 12px;
+          color: #71819A;
+        }
+        .buy{
+          background: #03AD8F!important;
+          color: #fff;
+        }
+        .sell{
+          background: #CD3333!important;
+          color: #fff;
+        }
+      }
+      .input_i{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        margin: 20px 0 10px;
+       
+      }
+    }
+    .view2_right{
+      position: absolute;
+      width: 130px;
+      right: 0px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .title{
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex: row;
+        justify-content: flex-start;
+        align-items: center;
+        span{
+          width: 50%;
+          height: auto;
+          padding: 3px 0;
+          @include text-color(input_color);
+          font-size: 12px;
+          text-align: center;
+        }
+      }
+      .amount_item{
+        width: 100%;
+        display: flex;
+        flex: row;
+        justify-content: flex-start;
+        align-items: center;
+        position: relative;
+        span{
+          width: 50%;
+          height: auto;
+          padding: 4.2px 0;
+          font-size: 12px;
+          text-align: center;
+        }
+        .span1{
+          color: #DD4D40;
+        }
+        .span2{
+          color: #71819A;
+        }
+        .bg{
+          position: absolute;
+          right:0;
+          top:0;
+          height: 100%;
+          width: 10%;
+          background: rgba($color:#DD5348, $alpha: 0.1);
+        }
+      }
+    }
+
+  }
+  .view_cny{
+    width:calc( 100% - 40px);
+    padding: 0 20px;
+    height: auto;
+    margin: 5px 0 15px;
+    font-size: 12px;
+    color: #71819A;
+  }
+  .shuliang{
+    width:calc( 100% - 40px);
+    padding: 0 20px;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .position{
+      width: 216px;
+      position: relative;
+      .shuliang_input{
+        width: 100%;
+      }
+      .peer_token{
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 12px;
+        color: #71819A;
+      }
+    }
+    .shuliang_right{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      .text_num{
+        font-size: 24px;
+        color: #1B55D1;
+      }
+      .shuliang_right_cny{
+        font-size: 12px;
+        color: #71819A
+      }
+    }
+  }
+  .slide_box{
+    width:calc( 100% - 40px);
+    padding: 0 20px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    .slide_left{
+      width: 216px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      .slide_content{
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 15px;
+      }
+      .edu{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+        color: #71819A;
+        margin-bottom: 20px;
+      }
+      .huadian{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        i{
+          margin-left: 5px;
+          font-size: 12px;
+        }
+      }
+    }
+    .view2_right{
+      position: absolute;
+      width: 130px;
+      right: 0;
+      top:30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .title{
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex: row;
+        justify-content: flex-start;
+        align-items: center;
+        span{
+          width: 50%;
+          height: auto;
+          padding: 3px 0;
+          @include text-color(input_color);
+          font-size: 12px;
+          text-align: center;
+        }
+      }
+      .amount_item{
+        width: 100%;
+        display: flex;
+        flex: row;
+        justify-content: flex-start;
+        align-items: center;
+        position: relative;
+        span{
+          width: 50%;
+          height: auto;
+          padding: 4.5px 0;
+          font-size: 12px;
+          text-align: center;
+        }
+        .span1{
+          color: #DD4D40;
+        }
+        .span2{
+          color: #71819A;
+        }
+        .bg{
+          position: absolute;
+          right:0;
+          top:0;
+          height: 100%;
+          width: 10%;
+          background: rgba($color:#03AD8F, $alpha: 0.1);
+        }
+      }
+    }
+  }
+  .buy_peer_token{
+    width:calc(100% - 40px);
+    height: 42px;
+    background: #1B55D1;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 42px;
+    margin: 20px 0;
+    font-size: 12px;
+    color: #fff;
+  }
+  .sell_peer_token{
+    width:calc(100% - 40px);
+    height: 42px;
+    background: #DD4D40;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 42px;
+    margin: 20px 0;
+    font-size: 12px;
+    color: #fff;
+  }
+  .waring_tips{
+    width:calc(100% - 40px);
+    height: 58px;
+    background: rgba($color:#D46B3A, $alpha: 0.1);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    img{
+      margin-right: 4px;
+    }
+    span{
+      color: #DF5A4E;
+      font-size: 12px;
+    }
+  }
+  .line_box{
+    width: 100%;
+    height: 10px;
+    @include bg-color(line_box);
+    margin-top: 20px;
+  }
+  .list_box{
+    width: calc(100% - 40px);
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 50px;
+    .list_nav{
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      @include border-bottom(1px,list_nav_active);
+      span{
+        padding: 16px 10px;
+        font-size: 13px;
+        color: #71819A;
+        margin-right: 10px;
+      }
+      .list_nav_active{
+        border-bottom: 3px solid #1B55D1;
+        color: #1B55D1!important;
+      }
+    }
+  }
+  
+}
+.el-dialog, .el-pager li{
+  @include bg-color(dialog_bg);
+}
+
+.el-dialog__title{
+  @include text-color(link_text);
+}
+.el-slider__runway{
+ @include bg-color(el-slider__runway);
+  height: 3px;
+}
+
+.el-slider__button{
+  background:url(~@/assets/images/slide_bg.png)no-repeat;
+  border: none;
+  border-radius: 0;
+  top: -10px;
+  top: -30px!important;
+  left: 10px!important;
+  width: 18px;
+  height: 18px;
+  
+}
+
+.el-slider__button-wrapper{
+  top: -17px;
+}
+.el-slider__stop{
+  height: 9px;
+  width: 6px;
+  border-radius: 0; 
+  @include bg-color(el-slider__runway);
+  transform: translateX(-50%);
+  top: -2.5px;
+}
+.el-slider__bar{
+  height: 3px;
+}
+
+
+
+.select_down{
+  @include bg-color(select_down);
+  @include border(select_down_border);
+  
+}
+.el-select-dropdown__item{
+  @include text-color(el-select-dropdown__item);
+}
+.el-popper[x-placement^=bottom] .popper__arrow::after{
+  @include border-bottom(1px,el-popper)
+}
+.el-popper[x-placement^=bottom] .popper__arrow{
+   @include border-bottom-color(border-bottom-color);
+}
+.el-input__inner{
+  @include bg-color(select_down);
+  @include border(el-input__inner_border_color);
+  @include text-color(link_text);
+}
+.el-select-dropdown__item.selected{
+ font-weight: 500;
+}
+.el-select-dropdown__item.hover, .el-select-dropdown__item:hover{
+  @include bg-color(select_down);
+}
+.el-select .el-input.is-focus .el-input__inner{
+  @include border(el-input__inner_border_color);
+}
+.el-select .el-input__inner:focus{
+  @include border(el-input__inner_border_color);
+}
+.el-select:hover .el-input__inner{
+  @include border(el-input__inner_border_color);
+}
+.el-input-number__decrease, .el-input-number__increase{
+  @include bg-color(select_down);
+  @include text-color(el-select-dropdown__item);
+}
+.el-input-number__decrease{
+  @include border-right-color(border-right-color)
+  
+}
+.el-input-number__increase{
+  @include border-left-color(border-right-color)
+}
+.el-input--medium > .el-input__inner{
+ @include text-color(input_color);
+ font-size:12px!important;
+}
+.el-input{
+  font-family: 12px!important;
+}
