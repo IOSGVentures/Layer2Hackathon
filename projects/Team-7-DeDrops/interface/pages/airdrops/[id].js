@@ -3,24 +3,29 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 import CardNFTItem from "components/Cards/CardNFTItem";
-import MainLayout from "layouts/main";
+import MainLayout from "layouts/Main";
 
 import { NFTMintContract, Bank1155Contract } from "libs/contracts";
 import { useWeb3React } from "@web3-react/core";
 
 import _ from "lodash";
 
-import { AirdropContract } from "libs/contracts";
+import { AirdropContract, Bank20Contract } from "libs/contracts";
 
 import { Airdrop as AirdropContractABI } from "constans/abi/Airdrop";
 import useContract from "hooks/useContract";
 import { DeDropsNFT as mintContractABI } from "constans/abi/DeDropsNFT";
 
+import { Bank20 as Bank20ABI } from "constans/abi/Bank20";
 import { Bank1155 as Bank1155ABI } from "constans/abi/Bank1155";
-import { parseBN } from "libs/web3Util";
+import { big, parseBN, parseUnit } from "libs/web3Util";
+
+import { get } from "libs/api";
 
 export default function AirdropDetail() {
   const { library, account } = useWeb3React();
+
+  const [claimStatus, setClaimStatus] = useState();
 
   const airdropDetailInitInfoState = {
     name: "",
@@ -63,6 +68,9 @@ export default function AirdropDetail() {
 
   // bank 1155 contract instance
   const bank1155Contract = useContract(Bank1155Contract, Bank1155ABI, account);
+
+  // bank20 contract instance
+  const bank20Contract = useContract(Bank20Contract, Bank20ABI, account);
 
   async function getNftDetail(nftID) {
     const nftData = await nftContract.idToItem(nftID);
@@ -153,6 +161,27 @@ export default function AirdropDetail() {
     }
   }, [airdropID, AirdropContractInstance]);
 
+  // check 当前 account 是否有资格领取 NFT
+  useEffect(() => {
+    async function checkNft() {
+      try {
+        const res = await get("/address/checkToken", {
+          address: account,
+          id: airdropID,
+        });
+
+        console.log("actions", res.data.data);
+        if (res.data.code === 0) {
+          setClaimStatus(res.data.data);
+        }
+      } catch (e) {
+        console.log("error checkNft");
+      }
+    }
+
+    checkNft();
+  }, [account, airdropID]);
+
   // get nft list
   useEffect(() => {
     (async () => {
@@ -181,43 +210,100 @@ export default function AirdropDetail() {
     })();
   }, [airdropDetail]);
 
+  async function handleClaim() {
+    console.log(claimStatus);
+    if (claimStatus) {
+      // if (!AirdropDetail) {
+      //   return;
+      // }
+      const sign = claimStatus.sign;
+      const unsign = claimStatus.unsign;
+
+      console.log([
+        unsign.token,
+        unsign.owner,
+        unsign.spender,
+        unsign.value,
+        unsign.deadline,
+        sign.v,
+        sign.r,
+        sign.s,
+      ]);
+
+      const res = await bank20Contract.claim(
+        unsign.token,
+        unsign.owner,
+        unsign.spender,
+        big(unsign.value),
+        big(unsign.deadline),
+        sign.v,
+        sign.r,
+        sign.s
+      );
+
+      if (res.hash) {
+        window.alert("提交成功,等待上链...");
+      }
+    }
+  }
+
   return (
     <>
       <div className="flex pt-32 flex-wrap bg-white">
         {airdropDetail && airdropDetail.airdrop ? (
-          <div className="w-full px-12">
-            <h4 className="text-xl font-bold text-blueGray-600">
-              {airdropDetail.name}
-            </h4>
+          <div className="w-full  px-12">
+            <div className="md:w-6/12">
+              <h4 className="text-xl font-bold text-blueGray-600">
+                {airdropDetail.name}
+              </h4>
 
-            <p className="text-md text-blueGray-500 font-bold my-4">
-              空投时间:{airdropDetail.airdrop.startTime}~
-              {airdropDetail.airdrop.endTime}
-            </p>
-            <p className="text-md text-blueGray-500 font-bold my-4">
-              空投描述:{airdropDetail.desc}
-            </p>
-            {/* <p className="text-md text-blueGray-500 font-bold my-4">
+              <p className="text-md text-blueGray-500 font-bold my-4">
+                空投时间:{airdropDetail.airdrop.startTime}~
+                {airdropDetail.airdrop.endTime}
+              </p>
+              <p className="text-md text-blueGray-500 font-bold my-4">
+                空投描述:{airdropDetail.desc}
+              </p>
+              {/* <p className="text-md text-blueGray-500 font-bold my-4">
             空投 Token 名称:
           </p> */}
-            <p className="text-md text-blueGray-500 font-bold my-4">
-              空投 Token 合约:
-              <a
-                href={`https://polygonscan.com/address/${airdropDetail.airdrop.token}`}
-                target="__blank"
-                className="ml-2 text-xs font-semibold inline-block py-1 px-2  rounded text-emerald-600 bg-emerald-200 mr-2"
-              >
-                {airdropDetail.airdrop.token}
-              </a>
-            </p>
-            <p className="text-md text-blueGray-500 font-bold my-4">
-              已领取/空投总量:{airdropDetail.airdrop.tokenAmount}
-            </p>
-            <p className="text-md text-blueGray-500 font-bold my-4">
-              空投地址数:{airdropDetail.airdrop.tokenClaimableCount}
-            </p>
+              <p className="text-md text-blueGray-500 font-bold my-4">
+                空投 Token 合约:
+                <a
+                  href={`https://polygonscan.com/address/${airdropDetail.airdrop.token}`}
+                  target="__blank"
+                  className="ml-2 text-sm font-semibold inline-block py-1 px-2  rounded text-emerald-600 bg-emerald-200 mr-2"
+                >
+                  {airdropDetail.airdrop.token}
+                </a>
+              </p>
+              <p className="text-md text-blueGray-500 font-bold my-4">
+                已领取/空投总量:
+                <span className="ml-2 text-sm font-semibold inline-block py-1 px-2  rounded text-emerald-600 bg-emerald-200 mr-2">
+                  {airdropDetail.airdrop.tokenAmount}
+                </span>
+              </p>
+              <p className="text-md text-blueGray-500 font-bold my-4">
+                空投地址数:
+                <span className="ml-2 text-sm font-semibold inline-block py-1 px-2  rounded text-emerald-600 bg-emerald-200 mr-2">
+                  {airdropDetail.airdrop.tokenClaimableCount}
+                </span>
+              </p>
 
-            <hr className="my-6 border-b-1 border-blueGray-200" />
+              <div className="w-full my-6">
+                <div className="relative w-full mb-3">
+                  <button
+                    onClick={handleClaim}
+                    className="bg-emerald-500 text-white block mr-1active:bg-emerald-500 font-bold uppercase text-lg px-12 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                  >
+                    领取
+                  </button>
+                </div>
+              </div>
+
+              <hr className="my-6 border-b-1 border-blueGray-200" />
+            </div>
 
             <h4 className="text-lg font-bold text-blueGray-600">
               空投领取条件
@@ -225,21 +311,10 @@ export default function AirdropDetail() {
             <p className="text-sm text-blueGray-500 font-bold my-4">
               持有以下NFT的地址才可以领取空投
             </p>
-            <div className="flex flex-wrap py-8">
+            <div className="flex flex-wrap py-8 mb-12">
               {nftDetailList.map((item) => (
-                <CardNFTItem data={item} />
+                <CardNFTItem key={item.id} data={item} />
               ))}
-            </div>
-
-            <div className="w-full my-6 px-4">
-              <div className="relative w-full mb-3 px-12">
-                <button
-                  className="bg-emerald-500 text-white block mr-1active:bg-emerald-500 font-bold uppercase text-lg px-12 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                  type="button"
-                >
-                  领取
-                </button>
-              </div>
             </div>
           </div>
         ) : (

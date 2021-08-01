@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 import { mintConditions } from "libs/nftConfig";
 
-import MainLayout from "layouts/main";
+import MainLayout from "layouts/Main";
 import AirdropsCardTable from "components/Cards/CardAirdropsTable";
 
 import { fakeData } from "libs/nftConfig";
@@ -17,10 +17,15 @@ import _ from "lodash";
 import useContract from "hooks/useContract";
 import { DeDropsNFT as mintContractABI } from "constans/abi/DeDropsNFT";
 import { Bank1155 as Bank1155ABI } from "constans/abi/Bank1155";
-import { parseBN } from "libs/web3Util";
+import { big, parseBN, parseUnit } from "libs/web3Util";
+
+import { get } from "libs/api";
 
 export default function NFTDetail({ data }) {
   const router = useRouter();
+
+  const [claimStatus, setClaimStatus] = useState();
+  const [isClaimed, setIsClaimed] = useState(false);
 
   const nftID = router.query.id;
 
@@ -50,6 +55,37 @@ export default function NFTDetail({ data }) {
   // bank 1155 contract instance
   const bank1155Contract = useContract(Bank1155Contract, Bank1155ABI, account);
 
+  // check 当前 account 是否有资格领取 NFT
+  useEffect(() => {
+    async function checkNft() {
+      try {
+        const res = await get("/address/checkNft", {
+          address: account,
+          id: nftID,
+        });
+
+        console.log("actions", res.data.data);
+        if (res.data.code === 0) {
+          setClaimStatus(res.data.data);
+
+          console.log(res.data.data.actions["sushi-swap"]);
+
+          // 当前地址是否已经领取
+          let accountNftCount = await nftContract.balanceOf(account, nftID);
+
+          console.log("accountNftCount", accountNftCount);
+          if (accountNftCount > 0) {
+            setIsClaimed(true);
+          }
+        }
+      } catch (e) {
+        console.log("error checkNft");
+      }
+    }
+
+    checkNft();
+  }, [nftContract, account, nftID]);
+
   useEffect(() => {
     (async () => {
       if (nftContract) {
@@ -66,15 +102,22 @@ export default function NFTDetail({ data }) {
           ? JSON.parse(nftData.info2)
           : nftDetailInitInfo2State;
 
-        // nft 已领取数量
-        let claimedCount = await bank1155Contract.tokenUserBalance(
-          NFTMintContract,
-          nftID,
-          account
+        // nft 待领取数量
+        // let claimedCount = await bank1155Contract.tokenUserBalance(
+        //   NFTMintContract,
+        //   nftID,
+        //   account
+        // );
+
+        let claimableCount = await nftContract.balanceOf(
+          Bank1155Contract,
+          nftID
         );
 
-        console.log("claimedCount", parseBN(claimedCount));
-        claimedCount = parseBN(claimedCount);
+        let claimedCount = nftDataInfo.nftCount - claimableCount;
+
+        // console.log("claimedCount", parseBN(claimedCount));
+        // claimedCount = parseBN(claimedCount);
 
         if (nftDataInfo.imgUrl === "") {
           nftDataInfo.imgUrl =
@@ -96,6 +139,41 @@ export default function NFTDetail({ data }) {
     })();
   }, [nftID, nftContract, account, bank1155Contract]);
 
+  async function handleClaim() {
+    if (!("sign" in claimStatus)) {
+      return;
+    }
+
+    const sign = claimStatus.sign;
+    const unsign = claimStatus.unsign;
+
+    console.log([
+      NFTMintContract,
+      unsign.id,
+      unsign.owner,
+      unsign.spender,
+      unsign.deadline,
+      sign.v,
+      sign.r,
+      sign.s,
+    ]);
+
+    const res = await bank1155Contract.claim(
+      NFTMintContract,
+      big(unsign.id),
+      unsign.owner,
+      unsign.spender,
+      big(unsign.deadline),
+      sign.v,
+      sign.r,
+      sign.s
+    );
+
+    if (res.hash) {
+      window.alert("提交成功,等待上链...");
+    }
+  }
+
   return (
     <>
       <section className="header relative pt-24 items-center flex">
@@ -111,7 +189,8 @@ export default function NFTDetail({ data }) {
 
                   <div className="mt-2">
                     <ul className="border border-blueGray-200 rounded-md divide-y divide-gray-200">
-                      {nftDetail.actions &&
+                      {nftDetail &&
+                        nftDetail.actions &&
                         nftDetail.actions.map((item) => (
                           <li
                             key={item.key}
@@ -124,9 +203,24 @@ export default function NFTDetail({ data }) {
                               </span>
                             </div>
                             <div className="ml-4 flex-shrink-0">
-                              <span className="bg-emerald-500 text-white font-bold  text-xs px-4 py-2 rounded  outline-none mr-1 mb-1 ">
-                                满足
-                              </span>
+                              {claimStatus && (
+                                <span
+                                  className={
+                                    (claimStatus &&
+                                    claimStatus.actions[item.key] &&
+                                    claimStatus.actions[item.key].match
+                                      ? "bg-emerald-500"
+                                      : "bg-red-500") +
+                                    " text-white font-bold  text-xs px-4 py-2 rounded  outline-none mr-1 mb-1 "
+                                  }
+                                >
+                                  {claimStatus &&
+                                  claimStatus.actions[item.key] &&
+                                  claimStatus.actions[item.key].match
+                                    ? "满足"
+                                    : "不满足"}
+                                </span>
+                              )}
                             </div>
                           </li>
                         ))}
@@ -142,9 +236,24 @@ export default function NFTDetail({ data }) {
                             </span>
                           </div>
                           <div className="ml-4 flex-shrink-0">
-                            <span className="bg-emerald-500 text-white font-bold  text-xs px-4 py-2 rounded  outline-none mr-1 mb-1 ">
-                              满足
-                            </span>
+                            {claimStatus && (
+                              <span
+                                className={
+                                  (claimStatus &&
+                                  claimStatus.money &&
+                                  claimStatus.money.match
+                                    ? "bg-emerald-500"
+                                    : "bg-red-500") +
+                                  "  text-white font-bold  text-xs px-4 py-2 rounded  outline-none mr-1 mb-1 "
+                                }
+                              >
+                                {claimStatus &&
+                                claimStatus.money &&
+                                claimStatus.money.match
+                                  ? "满足"
+                                  : "不满足"}
+                              </span>
+                            )}
                           </div>
                         </li>
                       ) : null}
@@ -153,12 +262,31 @@ export default function NFTDetail({ data }) {
 
                   <div className="w-full mt-6 px-4">
                     <div className="relative w-full mb-3 px-12">
-                      <button
-                        className="bg-emerald-500 text-white block w-full mr-1active:bg-emerald-500 font-bold uppercase text-lg px-12 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                        type="button"
-                      >
-                        领取
-                      </button>
+                      {isClaimed ? (
+                        <button
+                          className={
+                            "bg-red-50 text-white block w-full mr-1active:bg-emerald-500 font-bold uppercase text-lg px-12 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                          }
+                          type="button"
+                        >
+                          你已经领取过了
+                        </button>
+                      ) : (
+                        <button
+                          onClick={handleClaim}
+                          className={
+                            (claimStatus && claimStatus.match
+                              ? "bg-emerald-500 "
+                              : "bg-red-500") +
+                            " text-white block w-full mr-1active:bg-emerald-500 font-bold uppercase text-lg px-12 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                          }
+                          type="button"
+                        >
+                          {claimStatus && claimStatus.match
+                            ? "领取"
+                            : "没有资格领取"}
+                        </button>
+                      )}
                     </div>
                   </div>
 
@@ -187,13 +315,17 @@ export default function NFTDetail({ data }) {
                           智能合约: {data.contract}
                         </a> */}
 
-                        <span className="text-xs font-semibold inline-block py-1 px-2  rounded text-emerald-600 bg-emerald-200 mr-2">
+                        <span className="mt-2 mr-2 text-sm font-semibold inline-block py-1 px-2  rounded text-orange-600 bg-orange-200">
+                          ID: {nftID}
+                        </span>
+
+                        <span className="mt-2 text-sm font-semibold inline-block py-1 px-2  rounded text-emerald-600 bg-emerald-200 mr-2">
                           已领取/总数: {nftDetail.claimedCount} /{" "}
                           {nftDetail.nftCount}
                         </span>
 
                         {nftDetail.key && (
-                          <span className="mt-2 text-xs font-semibold inline-block py-1 px-2  rounded text-orange-600 bg-orange-200">
+                          <span className="mt-2 text-sm font-semibold inline-block py-1 px-2  rounded text-orange-600 bg-orange-200">
                             {nftDetail.tag}
                           </span>
                         )}

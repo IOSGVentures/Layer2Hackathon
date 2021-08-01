@@ -4,7 +4,7 @@ const polygon = require('./polygon')
 const chainlink = require('./chainlink')
 const graph = require('./graph')
 
-const nft = require('./nft')
+const verify = require('./verify')
 
 var _ctx
 
@@ -32,8 +32,8 @@ function load (ctx) {
     if (!_ctx.service.graph) {
         _ctx.service.graph = new graph(ctx)
     }
-    if (!_ctx.service.nft) {
-        _ctx.service.nft = new nft(ctx)
+    if (!_ctx.service.verify) {
+        _ctx.service.verify = new verify(ctx)
     }
     console.log('load service!')
     return _ctx

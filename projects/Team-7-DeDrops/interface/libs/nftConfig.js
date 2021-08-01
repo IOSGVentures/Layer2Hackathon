@@ -15,6 +15,10 @@ export const tabList = [
     key: "thegraph",
     text: "TheGraph",
   },
+  {
+    key: "polygon",
+    text: "Polygon",
+  },
 ];
 
 export const mintConditions = [

@@ -8,7 +8,7 @@ import _ from "lodash";
 
 import useContract from "hooks/useContract";
 import { DeDropsNFT as mintContractABI } from "constans/abi/DeDropsNFT";
-import { toAmount } from "libs/web3Util";
+import { big, toAmount } from "libs/web3Util";
 
 // components
 
@@ -65,6 +65,8 @@ export default function CardNFTMint() {
       info2: condition,
     };
 
+    console.log(data);
+
     // 提交上链
     const res = await mintContract.mint(
       toAmount(nftCount.current.value),
@@ -72,6 +74,10 @@ export default function CardNFTMint() {
       JSON.stringify(condition)
     );
     console.log(res);
+
+    if (res.hash) {
+      window.alert("提交成功,等待上链...");
+    }
   };
 
   const handleAddOnChainAction = () => {
@@ -304,7 +310,7 @@ export default function CardNFTMint() {
                       placeholder="主流资产总额"
                     />
 
-                    <span class="px-2">USD</span>
+                    <span className="px-2">USD</span>
                   </div>
                 </div>
               </div>

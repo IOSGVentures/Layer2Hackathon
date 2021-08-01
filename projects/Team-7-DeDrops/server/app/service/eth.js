@@ -32,12 +32,12 @@ class EthService extends Service {
         token = token.toLowerCase();
         if (token == 'eth' || token == 'ethereum') {
             let balacne = await this.provider.getBalance(address)
-            return balacne.div(BigNumber.from(10).pow(18)).toString()
+            return {balacne: balacne.toString(), decimals: 18}
         } else {
             let contract = this.getContract(this.tokenAddress(token), ERC20ABI)
             let decimals = await contract.decimals()
             let balacne = await contract.balanceOf(address)
-            return BigNumber.from(balacne).div(BigNumber.from(10).pow(decimals)).toString()
+            return {balacne: balacne.toString(), decimals: decimals}
         }
     }
 }

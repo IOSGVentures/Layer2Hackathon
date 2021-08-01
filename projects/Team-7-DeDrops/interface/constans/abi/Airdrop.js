@@ -15,6 +15,12 @@ export const Airdrop = [
     inputs: [
       {
         indexed: true,
+        internalType: "uint256",
+        name: "id",
+        type: "uint256",
+      },
+      {
+        indexed: true,
         internalType: "address",
         name: "token",
         type: "address",
@@ -120,6 +126,11 @@ export const Airdrop = [
         internalType: "address",
         name: "token",
         type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
       },
       {
         internalType: "string",

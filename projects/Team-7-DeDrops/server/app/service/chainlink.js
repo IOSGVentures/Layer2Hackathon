@@ -21,7 +21,7 @@ class LinkService extends Service {
         // update time
         // let timestamp = await contract.latestTimestamp()
         let price = await contract.latestAnswer()
-        return BigNumber.from(price).div(BigNumber.from(10).pow(decimals)).toString()
+        return {price: price.toString(), decimals: decimals}
     }
 
     async totalAssets(address) {
@@ -30,14 +30,14 @@ class LinkService extends Service {
         }
         let tokens = this._tokens()
         for (let token of tokens) {
-            let price = await this.getPrice(token)
-            let balacne = await this.service.eth.balanceOf(address, token)
-            if (BigNumber.from(balacne).gt(0)) {
+            let balacne = await this.service.polygon.balanceOf(address, token)
+            if (BigNumber.from(balacne.balacne).gt(0)) {
+                let price = await this.getPrice(token)
                 assets[token] = {
                     price: price,
-                    balacne: balacne,
+                    balacne: balacne
                 }
-                assets.total = BigNumber.from(balacne).mul(price).add(assets.total).toString()
+                assets.total = BigNumber.from(balacne.balacne).mul(price.price).div(price.decimals).div(balacne.decimals).add(assets.total).toString()
             }
         }
         return assets

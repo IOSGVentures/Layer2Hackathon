@@ -11,7 +11,7 @@ class GraphService extends Service {
     async query(subgraph, query) {
         console.log('query:',subgraph, query)
         let resp = await axios.post(subgraph, query)
-        console.log('resp:', resp.data)
+        // console.log('resp:', resp.data)
         return resp.data.data
     }
 
@@ -25,7 +25,7 @@ class GraphService extends Service {
     }
 
     async sushiLiquidity(address) {
-        
+
     }
 }
 

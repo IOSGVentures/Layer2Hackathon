@@ -7,7 +7,6 @@ import { useWeb3React } from "@web3-react/core";
 import useContract from "hooks/useContract";
 import { Airdrop as AirdropABI } from "constans/abi/Airdrop";
 import { IERC20 as IERC20ABI } from "constans/abi/IERC20";
-import { toAmount, toNum, parseUnit } from "libs/web3Util";
 import getContract from "libs/getContract";
 
 import { NFTMintContract, Bank1155Contract } from "libs/contracts";
@@ -15,7 +14,7 @@ import { NFTMintContract, Bank1155Contract } from "libs/contracts";
 import { DeDropsNFT as mintContractABI } from "constans/abi/DeDropsNFT";
 
 import { Bank1155 as Bank1155ABI } from "constans/abi/Bank1155";
-import { parseBN } from "libs/web3Util";
+import { parseBN, big, parseUnit, toAmount, toNum } from "libs/web3Util";
 
 // components
 
@@ -176,7 +175,9 @@ export default function CardSettings() {
 
     const airdrop = {
       token: tokenAddrRef.current.value,
+      // 空投token 总数
       tokenAmount: tokenAmountRef.current.value,
+      // 可领取空投的地址数
       tokenClaimableCount: tokenClaimableCountRef.current.value,
       startTime: startTimeRef.current.value,
       endTime: endTimeRef.current.value,
@@ -215,22 +216,32 @@ export default function CardSettings() {
       AirdropContract
     );
 
-    console.log("allowance", toNum(allowance));
-    console.log("tokenAmount", toNum(airdrop.tokenAmount));
+    console.log("allowance", allowance, toNum(allowance, 18));
 
-    if (toNum(allowance) >= toNum(airdrop.tokenAmount)) {
-      console.log(
+    console.log("tokenAmount", airdrop.tokenAmount);
+
+    // const allowanceBN = parseUnit(allowance);
+
+    airdrop.tokenAmountBN = parseUnit(airdrop.tokenAmount);
+
+    console.log("tokenAmountBN", airdrop.tokenAmountBN);
+
+    // allowance >= 需要空投token数量
+    if (allowance.gte(airdrop.tokenAmountBN)) {
+      console.log("allowance > tokenAmount");
+      console.log([
         tokenAddrRef.current.value,
-        toAmount(airdrop.tokenAmount, 18),
+        airdrop.tokenAmount,
         JSON.stringify(info),
-        JSON.stringify({ airdrop, condition })
-      );
+        JSON.stringify({ airdrop, condition }),
+      ]);
 
       // return;
       // 提交上链
+
       const res = await airdropContractIns.drop(
         tokenAddrRef.current.value,
-        toAmount(airdrop.tokenAmount, 18),
+        parseUnit(airdrop.tokenAmount),
         JSON.stringify(info),
         JSON.stringify({ airdrop, condition })
       );
@@ -273,17 +284,17 @@ export default function CardSettings() {
   };
 
   //平均每个地址获得空投TOKEN 数量
-  const perAddrToken = () => {
-    try {
-      let tokenAmount = Number(tokenAmountRef.current.value);
-      let tokenClaimableCount = Number(tokenClaimableCountRef.current.value);
-      console.log("perAddrToken", tokenAmount / tokenClaimableCount);
-      return tokenAmount / tokenClaimableCount;
-    } catch (e) {
-      console.log("perAddrToken error");
-      return "";
-    }
-  };
+  // const perAddrToken = () => {
+  //   try {
+  //     let tokenAmount = Number(tokenAmountRef.current.value);
+  //     let tokenClaimableCount = Number(tokenClaimableCountRef.current.value);
+  //     console.log("perAddrToken", tokenAmount / tokenClaimableCount);
+  //     return tokenAmount / tokenClaimableCount;
+  //   } catch (e) {
+  //     console.log("perAddrToken error");
+  //     return "";
+  //   }
+  // };
 
   return (
     <>
@@ -514,7 +525,7 @@ export default function CardSettings() {
                     ref={tokenAddrRef}
                     type="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue="0x67a32987a8eaa0644702c362b53b8eebd126c20b"
+                    defaultValue="0x9D8c588A1fddF2575266bEf1a6a479eA46faBdd9"
                   />
                 </div>
               </div>

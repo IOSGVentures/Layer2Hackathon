@@ -25,7 +25,7 @@ const fakeData = [
 ];
 
 const tabListKeys = tabList.map((item) => item.key);
-tabListKeys.splice(0, 1);
+// tabListKeys.splice(0, 1);
 // components
 
 const renderTitle = (typeKey) => {

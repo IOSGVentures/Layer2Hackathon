@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
-import MainLayout from "layouts/main";
+import MainLayout from "layouts/Main";
 import AirdropsTabs from "components/Tabs/AirdropsTabs";
 import AirdropsCardTable from "components/Cards/CardAirdropsTable";
 

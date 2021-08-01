@@ -1,6 +1,6 @@
 import { formatUnits, parseUnits } from "@ethersproject/units";
-import { ethers } from "ethers";
-import { BigNumber } from "bignumber.js";
+import { ethers, BigNumber } from "ethers";
+import { BigNumber as BigNumberJs } from "bignumber.js";
 
 export function shortenHex(hex, length = 4) {
   return `${hex.substring(0, length + 2)}…${hex.substring(
@@ -79,16 +79,16 @@ export function toString(bn) {
 
 // 转换成 bignumber
 export const toAmount = (num, decimals = 0) => {
-  let a = new ethers.utils.BigNumber(10).pow(decimals);
-  let b = BigNumber(a.toString()).multipliedBy(BigNumber(num));
+  let a = BigNumber.from(10).pow(decimals);
+  let b = BigNumber.from(a.toString()).mul(BigNumber.from(num));
 
   console.log(num, b);
-  return new ethers.utils.BigNumber(b.toString());
+  return BigNumber.from(b.toString());
 };
 
 // bignumber => 小值
 export const toNum = (amount, decimals = 0) => {
-  let a = new ethers.utils.BigNumber(10).pow(decimals);
-  let b = BigNumber(amount.toString()).dividedBy(BigNumber(a));
+  let a = BigNumber.from(10).pow(decimals);
+  let b = BigNumber.from(amount.toString()).div(BigNumber.from(a));
   return b.toString();
 };

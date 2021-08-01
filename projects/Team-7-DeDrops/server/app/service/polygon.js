@@ -13,7 +13,7 @@ class PolygonService extends Service {
     }
 
     tokenAddress(token) {
-        let addr = config.eth.tokens[token]
+        let addr = config.polygon.tokens[token]
         if (!addr) {
             throw new Error(`token address not found:${token}.`)
         }
@@ -32,12 +32,12 @@ class PolygonService extends Service {
         token = token.toLowerCase();
         if (token == 'matic') {
             let balacne = await this.provider.getBalance(address)
-            return balacne.div(BigNumber.from(10).pow(18)).toString()
+            return {balacne: balacne.toString(), decimals: 18}
         } else {
             let contract = this.getContract(this.tokenAddress(token), ERC20ABI)
             let decimals = await contract.decimals()
             let balacne = await contract.balanceOf(address)
-            return BigNumber.from(balacne).div(BigNumber.from(10).pow(decimals)).toString()
+            return {balacne: balacne.toString(), decimals: decimals}
         }
     }
 }
