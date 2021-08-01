@@ -1,0 +1,57 @@
+@import '../base.scss';
+.OrderRegistration{
+  width:calc(100% - 40px);
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 14px 20px;
+  .thead{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    span{
+      font-size: 10px;
+      color: #657F9D;
+    }
+  }
+  .tdata{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    margin:10px 0 ;
+    .td_left,.td_center,.td_right{
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    .td_left :first-child{
+      color: #6B85A5;
+    }
+    .td_left :last-child{
+      @include text-color(text);
+      margin-left: 12px;
+    }
+    .td_center :first-child{
+      color: #03AD8F;
+    }
+    .td_center :last-child{
+      color: #D04B64;
+      margin-left: 10px;
+    }
+    .td_right :first-child{
+      @include text-color(text);
+    }
+    .td_right :last-child{
+      color: #6B85A5;
+      margin-left: 10px;
+    }
+  }
+}

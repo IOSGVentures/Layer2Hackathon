@@ -1,0 +1,41 @@
+@import "../base.scss";
+.Deal{
+  width: calc(100% - 40px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 20px;
+  .fixed_width,.buy,.sell{
+    width: 20%;
+  }
+  .thead{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    span{
+      font-size: 10px;
+      color: #657F9D;
+    }
+  }
+  .td_data{
+    width: 100%;
+    padding: 10px 0;
+    font-size: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .time,.price,.num{
+      @include text-color(text);
+    }
+    .buy{
+      color: #03AD8F;
+    }
+    .sell{
+      color: #D04B64;
+    }
+  }
+}
