@@ -1,0 +1,178 @@
+const { expect, assert } = require('chai')
+const { BigNumber, utils} = require('ethers')
+const fs = require('fs')
+const hre = require('hardhat')
+
+
+describe('bank1155-test', function () {
+    let DOMAIN_SEPARATOR = ''
+    let CLAIM_TYPEHASH = ''
+    let PASSWORD_TYPEHASH = ''
+    let accounts
+	let erc
+    let tokenId = b(1)
+	let bank
+	let deadline
+    let vrs
+    let psw = '中文test'
+
+	before(async function () {
+		accounts = await ethers.getSigners()
+        
+		console.log('account 0', accounts[0].address)
+		console.log('account 1', accounts[1].address)
+		console.log('account 2', accounts[2].address)
+	})
+	
+	it('deploy', async function () {
+		const Bank1155 = await ethers.getContractFactory('Bank1155')
+		bank = await Bank1155.deploy()
+		await bank.deployed()
+        DOMAIN_SEPARATOR = await bank.DOMAIN_SEPARATOR()
+        CLAIM_TYPEHASH = await bank.CLAIM_TYPEHASH()
+        PASSWORD_TYPEHASH = await bank.PASSWORD_TYPEHASH()
+		console.log('Claim deployed to:', bank.address, 'DOMAIN_SEPARATOR:', DOMAIN_SEPARATOR, 'CLAIM_TYPEHASH:', CLAIM_TYPEHASH, 'PASSWORD_TYPEHASH:', PASSWORD_TYPEHASH)
+		
+		const ERC = await ethers.getContractFactory('TestNFT1155')
+		erc = await ERC.deploy()
+		await erc.deployed()
+		console.log('ERC deployed to:', erc.address)
+
+        await erc.mint(accounts[0].address, tokenId, b(100), utils.arrayify([]))
+        console.log('mint done')
+
+        await print()
+	})
+
+	it('deposit', async function () {
+        await erc.setApprovalForAll(bank.address, true)
+        await bank.deposit(erc.address, tokenId, accounts[0].address, b(10))
+        await print()
+    })
+
+	it('transfer for deposit', async function () {
+        await erc.safeTransferFrom(accounts[0].address, bank.address, tokenId, b(15), utils.arrayify([]))
+        await print()
+    })
+
+	it('withdraw', async function () {
+        await bank.withdraw(erc.address, tokenId, accounts[1].address, b(2))
+        await print()
+    })
+
+	it('sign claim', async function () {
+        holder = accounts[0].address
+        spender = accounts[1].address
+        deadline = b(parseInt(Date.now() / 1000) + 86400)
+        chainId = accounts[0].provider._network.chainId
+    
+        let digest = utils.keccak256(
+            utils.solidityPack(
+                ['bytes1', 'bytes1', 'bytes32', 'bytes32'],
+                [
+                    '0x19',
+                    '0x01',
+                    DOMAIN_SEPARATOR,
+                    utils.keccak256(
+                        utils.defaultAbiCoder.encode(
+                            ['bytes32', 'address', 'uint256', 'address', 'address', 'uint256'],
+                            [CLAIM_TYPEHASH, erc.address, tokenId, holder, spender, deadline]
+                        )
+                    )
+                ]
+            )
+        )
+            
+        let privateKey = '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80' //account0 pk
+        let signingKey = new ethers.utils.SigningKey(privateKey)
+        let sign = signingKey.signDigest(digest)
+        vrs = utils.splitSignature(sign)
+        console.log(vrs)
+	})
+
+    it('claim', async function () {
+        await bank.connect(accounts[1]).claim(erc.address, tokenId, holder, spender, deadline
+            , vrs.v, vrs.r, vrs.s, {gasLimit:BigNumber.from('8000000')})
+        console.log('claim')
+        
+        await print()
+    })
+
+	it('sign password', async function () {
+        holder = accounts[0].address
+        spender = accounts[1].address
+        deadline = b(parseInt(Date.now() / 1000) + 86400)
+        chainId = accounts[0].provider._network.chainId
+    
+        let digest = utils.keccak256(
+            utils.solidityPack(
+                ['bytes1', 'bytes1', 'bytes32', 'bytes32'],
+                [
+                    '0x19',
+                    '0x01',
+                    DOMAIN_SEPARATOR,
+                    utils.keccak256(
+                        utils.defaultAbiCoder.encode(
+                            ['bytes32', 'address', 'uint256', 'address', 'string', 'uint256'],
+                            [PASSWORD_TYPEHASH, erc.address, tokenId, holder, psw, deadline]
+                        )
+                    )
+                ]
+            )
+        )
+            
+        let privateKey = '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80' //account0 pk
+        let signingKey = new ethers.utils.SigningKey(privateKey)
+        let sign = signingKey.signDigest(digest)
+        console.log('sign', sign)
+
+        vrs = utils.splitSignature(sign)
+        console.log('sign vrs', vrs)
+	})
+
+    it('password', async function () {
+        await bank.connect(accounts[2]).password(erc.address, tokenId, holder, psw, deadline
+            , vrs.v, vrs.r, vrs.s, {gasLimit:BigNumber.from('8000000')})
+        console.log('password')
+        
+        await print()
+    })
+
+    async function print() {
+        console.log('')
+
+        console.log('account0 nft1:', n(await erc.balanceOf(accounts[0].address, b(1))))
+        console.log('account1 nft1:', n(await erc.balanceOf(accounts[1].address, b(1))))
+        console.log('account2 nft1:', n(await erc.balanceOf(accounts[2].address, b(1))))
+        console.log('bank nft1:', n(await erc.balanceOf(bank.address, b(1))))
+
+        console.log('')
+	}
+
+
+	function getAbi(jsonPath) {
+		let file = fs.readFileSync(jsonPath)
+		let abi = JSON.parse(file.toString()).abi
+		return abi
+	}
+
+	function m(num) {
+		return BigNumber.from('1000000000000000000').mul(num)
+	}
+
+	function d(bn) {
+		return bn.div('1000000000000000').toNumber() / 1000
+	}
+
+	function b(num) {
+		return BigNumber.from(num)
+	}
+
+	function n(bn) {
+		return bn.toNumber()
+	}
+
+	function s(bn) {
+		return bn.toString()
+	}
+})
