@@ -1,0 +1,72 @@
+body {
+  font-family: 'Helvetica';
+  padding: 0;
+  margin: 0;
+}
+header {
+  background-color: #0b0816;
+  min-height: 50px;
+}
+main {
+  padding: 10px;
+}
+main section {
+  display: flex;
+}
+main section > div {
+  width: 50%;
+}
+main section > div:nth-child(2) {
+  width: calc(50% - 40px);
+  margin-left: 40px;
+}
+input {
+  width: 200px;
+  padding: 5px;
+}
+button {
+  margin: 0px 0px 20px 0;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 4px;
+  background-color: #004433;
+  color: white;
+  font-weight: bold;
+  opacity: 0.8;
+  cursor: pointer;
+}
+button:hover {
+  opacity: 1;
+}
+button#cancel {
+  background-color: red;
+}
+table {
+  padding: 0;
+}
+table td,
+table th {
+  padding: 8px;
+}
+table tr:nth-child(even) {
+  background: #EEE;
+}
+table tr.market-closed {
+  opacity: 0.5;
+}
+table tr.frozen {
+  color: #6b77ff;
+}
+table tr.suspended {
+  color: red;
+}
+table tr.stale {
+  background-color: orange;
+}
+table tr.flagged {
+  background-color: yellow;
+}
+.helper-text {
+  color: #CCC;
+  font-size: 12px;
+}
